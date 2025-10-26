@@ -485,6 +485,14 @@
         const heroIntro = document.getElementById('heroIntro');
         const sections = document.querySelectorAll('.section');
         const contents = document.querySelectorAll('.content');
+        const backgrounds = [
+            document.getElementById('bg1'),
+            document.getElementById('bg2'),
+            document.getElementById('bg3'),
+            document.getElementById('bg4'),
+            document.getElementById('bg5'),
+            document.getElementById('bg6')
+        ];
 
         window.addEventListener('scroll', function() {
             const scrollY = window.scrollY;
@@ -509,6 +517,13 @@
                 heroTitle.style.top = topPos + '%';
                 heroTitle.style.opacity = '1';
             }
+            // Mantener título pequeño y arriba (0.35-0.85)
+            else if (progress > 0.35 && progress <= 0.85) {
+                heroTitle.style.fontSize = '7vw';
+                heroTitle.style.top = '22%';
+                heroTitle.style.opacity = '1';
+                heroTitle.style.animation = 'none';
+            }
             
             // FASE 3: Introducción aparece (0.3-0.5)
             if (progress >= 0.3 && progress <= 0.5) {
@@ -526,8 +541,8 @@
             if (progress >= 0.4 && progress <= 0.6) {
                 const phase = (progress - 0.4) / 0.2;
                 heroCharacter.style.opacity = phase;
-                heroCharacter.style.right = '-10%';
-                heroCharacter.style.bottom = '-5%';
+                heroCharacter.style.right = '-15%';
+                heroCharacter.style.bottom = '0';
                 heroCharacter.style.transform = 'scale(1)';
             } else if (progress < 0.4) {
                 heroCharacter.style.opacity = '0';
@@ -544,35 +559,45 @@
             // FASE 6: Imagen crece y se mueve al centro (0.6-0.85)
             if (progress > 0.6 && progress <= 0.85) {
                 const phase = (progress - 0.6) / 0.25;
-                const rightPos = -10 + (phase * 30); // -10% a 20%
-                const bottomPos = -5 + (phase * 5); // -5% a 0%
-                const scale = 1 + (phase * 0.4); // 1 a 1.4
+                const rightPos = -15 + (phase * 40); // -15% a 25%
+                const scale = 1 + (phase * 0.5); // 1 a 1.5
                 
                 heroCharacter.style.right = rightPos + '%';
-                heroCharacter.style.bottom = bottomPos + '%';
+                heroCharacter.style.bottom = '0';
                 heroCharacter.style.transform = 'scale(' + scale + ')';
                 
-                // Título desaparece
-                heroTitle.style.opacity = Math.max(0, 1 - phase * 1.5);
+                // Título desaparece gradualmente
+                heroTitle.style.opacity = Math.max(0, 1 - phase * 2);
             }
             
             // FASE 7: Imagen centrada final (0.85-1.0)
             if (progress > 0.85) {
-                const phase = (progress - 0.85) / 0.15;
-                heroCharacter.style.right = '20%';
-                heroCharacter.style.bottom = '0%';
-                heroCharacter.style.transform = 'scale(1.4)';
+                heroCharacter.style.right = '25%';
+                heroCharacter.style.bottom = '0';
+                heroCharacter.style.transform = 'scale(1.5)';
                 heroTitle.style.opacity = '0';
             }
 
+            // Transiciones de fondos para las secciones
             sections.forEach((section, index) => {
                 const rect = section.getBoundingClientRect();
                 const content = contents[index];
+                
+                // Hacer visible el contenido
                 if (rect.top < windowHeight * 0.7) {
                     content.classList.add('visible');
                 }
+                
+                // Cambiar fondo según la sección visible
+                const bgIndex = parseInt(section.getAttribute('data-bg')?.replace('bg', '') || '1') - 1;
+                if (rect.top < windowHeight * 0.5 && rect.bottom > windowHeight * 0.5) {
+                    backgrounds.forEach((bg, i) => {
+                        bg.style.opacity = i === bgIndex ? '1' : '0';
+                    });
+                }
             });
 
+            // Ocultar indicador de scroll
             if (scrollY > 200) {
                 document.getElementById('scrollIndicator').style.opacity = '0';
             }
