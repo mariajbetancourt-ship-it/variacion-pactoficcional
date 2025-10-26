@@ -135,7 +135,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 12rem;
+            font-size: 10rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.05rem;
@@ -150,12 +150,13 @@
 
         .hero-character {
             position: absolute;
-            left: 0;
-            top: 50%;
-            height: 60vh;
+            right: 0;
+            bottom: 0;
+            height: 40vh;
             opacity: 0;
             z-index: 3;
             transition: all 0.1s linear;
+            transform-origin: bottom right;
         }
 
         .hero-character img {
@@ -287,8 +288,8 @@
         }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 4rem; }
-            .hero-character { height: 40vh; }
+            .hero-title { font-size: 3.5rem; }
+            .hero-character { height: 30vh; }
             .text { font-size: 1.1rem; line-height: 1.8; }
             .chapter { font-size: 1.5rem; }
         }
@@ -484,45 +485,46 @@
             const scrollSection = windowHeight * 4;
             const progress = Math.min(scrollY / scrollSection, 1);
 
-            // FASE 1 y 2: Título (0-0.35)
-            if (progress <= 0.2) {
+            // FASE 1: Título grande y completo (0-0.25)
+            if (progress <= 0.25) {
                 heroTitle.style.opacity = '1';
-                heroTitle.style.fontSize = '12rem';
+                heroTitle.style.fontSize = '10rem';
                 heroTitle.style.top = '50%';
-            } else if (progress > 0.2 && progress <= 0.35) {
-                const phase = (progress - 0.2) / 0.15;
-                const fontSize = 12 - (phase * 8);
-                const topPos = 50 - (phase * 30);
+            } 
+            // FASE 2: Título se hace pequeño y sube (0.25-0.4)
+            else if (progress > 0.25 && progress <= 0.4) {
+                const phase = (progress - 0.25) / 0.15;
+                const fontSize = 10 - (phase * 6); // 10rem a 4rem
+                const topPos = 50 - (phase * 25); // 50% a 25%
                 heroTitle.style.fontSize = fontSize + 'rem';
                 heroTitle.style.top = topPos + '%';
                 heroTitle.style.opacity = '1';
             }
             
-            // FASE 3: Introducción aparece (0.3-0.5)
-            if (progress >= 0.3 && progress <= 0.5) {
-                const phase = (progress - 0.3) / 0.2;
-                const topPos = 58 - (phase * 3);
-                const brightness = 0.3 + (phase * 0.7);
+            // FASE 3: Introducción aparece (0.35-0.55)
+            if (progress >= 0.35 && progress <= 0.55) {
+                const phase = (progress - 0.35) / 0.2;
+                const topPos = 60 - (phase * 5); // baja de 60% a 55%
+                const brightness = 0.2 + (phase * 0.8);
                 heroIntro.style.opacity = phase;
                 heroIntro.style.top = topPos + '%';
                 heroIntro.style.filter = 'brightness(' + brightness + ')';
-            } else if (progress < 0.3) {
+            } else if (progress < 0.35) {
                 heroIntro.style.opacity = '0';
             }
             
-            // FASE 4: Imagen desde izquierda (0.4-0.7)
-            if (progress >= 0.4 && progress <= 0.7) {
-                const phase = (progress - 0.4) / 0.3;
-                const leftPos = -20 + (phase * 50);
-                const scale = 0.5 + (phase * 0.8);
-                heroCharacter.style.opacity = phase;
-                heroCharacter.style.left = leftPos + '%';
-                heroCharacter.style.transform = 'translateY(-50%) scale(' + scale + ')';
-            } else if (progress < 0.4) {
+            // FASE 4: Imagen aparece desde esquina inferior derecha (0.5-0.75)
+            if (progress >= 0.5 && progress <= 0.75) {
+                const phase = (progress - 0.5) / 0.25;
+                const scale = 1 + (phase * 1.5); // crece de 1 a 2.5
+                heroCharacter.style.opacity = Math.min(1, phase * 2);
+                heroCharacter.style.transform = 'scale(' + scale + ')';
+            } else if (progress < 0.5) {
                 heroCharacter.style.opacity = '0';
+                heroCharacter.style.transform = 'scale(1)';
             }
             
-            // FASE 5: Introducción se desvanece (0.6-0.75)
+            // FASE 5: Introducción desaparece mientras imagen crece (0.6-0.75)
             if (progress >= 0.6 && progress <= 0.75) {
                 const phase = (progress - 0.6) / 0.15;
                 heroIntro.style.opacity = 1 - phase;
@@ -530,14 +532,18 @@
                 heroIntro.style.opacity = '0';
             }
             
-            // FASE 6: Imagen al centro (0.7-1.0)
-            if (progress > 0.7) {
-                const phase = (progress - 0.7) / 0.3;
-                const leftPos = 30 + (phase * 10);
-                const scale = 1.3 + (phase * 0.2);
-                heroCharacter.style.left = leftPos + '%';
-                heroCharacter.style.transform = 'translateY(-50%) scale(' + scale + ')';
-                heroTitle.style.opacity = Math.max(0, 1 - phase * 2);
+            // FASE 6: Imagen continúa creciendo y centrándose (0.75-1.0)
+            if (progress > 0.75) {
+                const phase = (progress - 0.75) / 0.25;
+                const scale = 2.5 + (phase * 0.5); // crece hasta 3
+                const rightPos = 0 - (phase * 15); // se mueve hacia el centro
+                const bottomPos = 0 - (phase * 10);
+                heroCharacter.style.transform = 'scale(' + scale + ')';
+                heroCharacter.style.right = rightPos + '%';
+                heroCharacter.style.bottom = bottomPos + '%';
+                
+                // Título desaparece
+                heroTitle.style.opacity = Math.max(0, 1 - phase * 3);
             }
 
             sections.forEach((section, index) => {
