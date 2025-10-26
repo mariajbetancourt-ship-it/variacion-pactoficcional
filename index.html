@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al McWhiggin: El Coleccionista</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #2C2C2C;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Hero Parallax Section */
+        .hero-parallax {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            will-change: transform;
+        }
+
+        /* Background clouds - static full screen */
+        .layer-background {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .layer-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Al character - moves with cursor, centered */
+        .layer-character {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 600px;
+            max-width: 70vw;
+            transition: transform 0.15s ease-out;
+        }
+
+        .layer-character img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 40px rgba(0,0,0,0.9));
+        }
+
+        /* Gradient overlay for smooth transition */
+        .gradient-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to bottom, transparent 0%, #2C2C2C 100%);
+            z-index: 3;
+        }
+
+        /* Title Section - appears after parallax */
+        .title-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #2C2C2C;
+            z-index: 5;
+        }
+
+        .title-content {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .title-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 2rem;
+        }
+
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            transition: opacity 0.8s ease;
+        }
+
+        .bg1 { background: radial-gradient(circle at 30% 50%, #3d3520 0%, #2C2C2C 100%); }
+        .bg2 { background: radial-gradient(circle at 70% 50%, #4a2e2e 0%, #2C2C2C 100%); }
+        .bg3 { background: radial-gradient(circle at 50% 30%, #3d4a2e 0%, #2C2C2C 100%); }
+        .bg4 { background: radial-gradient(circle at 50% 70%, #4a3d2e 0%, #2C2C2C 100%); }
+        .bg5 { background: radial-gradient(circle at 50% 50%, #353535 0%, #2C2C2C 100%); }
+        .bg6 { background: radial-gradient(circle at 30% 70%, #3d2e3d 0%, #2C2C2C 100%); }
+
+        .content {
+            max-width: 900px;
+            text-align: center;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title {
+            font-size: 5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            background: linear-gradient(45deg, #D6A100, #8EC63F, #D83227);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(214, 161, 0, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(214, 161, 0, 0.8)); }
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            color: #8EC63F;
+            font-style: italic;
+            letter-spacing: 0.2rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+        }
+
+        .text {
+            font-size: 1.3rem;
+            line-height: 2.2;
+            margin-bottom: 2rem;
+            color: #c0c0c0;
+            text-align: justify;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .highlight {
+            color: #D6A100;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: block;
+            margin: 3rem 0;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .chapter {
+            font-size: 2rem;
+            color: #D6A100;
+            margin-bottom: 2rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: rgba(214, 161, 0, 0.7);
+            animation: bounce 2s infinite;
+            z-index: 100;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @media (max-width: 768px) {
+            .layer-character { width: 400px; }
+            .title { font-size: 2.8rem; letter-spacing: 0.2rem; }
+            .subtitle { font-size: 1.3rem; }
+            .text { font-size: 1.1rem; line-height: 1.8; }
+            .chapter { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Parallax Section with Images -->
+    <div class="hero-parallax">
+        <!-- Background clouds -->
+        <div class="parallax-layer layer-background" id="layerBackground">
+            <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Toy Story Clouds">
+        </div>
+
+        <!-- Al McWhiggin Character (moves with cursor) -->
+        <div class="parallax-layer layer-character" id="layerCharacter">
+            <img src="https://i.ibb.co/svYB0Y9n/1761501197580iqjpws0t-removebg-preview-1.png" alt="Al McWhiggin">
+        </div>
+
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <div class="scroll-indicator">↓</div>
+
+    <!-- Title Section -->
+    <div class="title-section">
+        <div class="title-content">
+            <h1 class="title">EL COLECCIONISTA</h1>
+            <p class="subtitle">La historia jamás contada de Al McWhiggin</p>
+        </div>
+    </div>
+
+    <div class="parallax-bg bg1" id="bg1"></div>
+    <div class="parallax-bg bg2" id="bg2" style="opacity: 0;"></div>
+    <div class="parallax-bg bg3" id="bg3" style="opacity: 0;"></div>
+    <div class="parallax-bg bg4" id="bg4" style="opacity: 0;"></div>
+    <div class="parallax-bg bg5" id="bg5" style="opacity: 0;"></div>
+    <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
+
+    <!-- Capítulo 1 -->
+    <div class="section" data-bg="bg2">
+        <div class="content">
+            <h2 class="chapter">I. El Disfraz de la Desesperación</h2>
+            <p class="text">
+                El traje de pollo pesa más de lo que la gente imagina. No solo físicamente, el plástico rígido, las plumas sintéticas que rascan, sino emocionalmente. Cada mañana, cuando me lo pongo frente al Bazar del Juguete de Al, siento cómo mi dignidad se desvanece bajo las capas de espuma amarilla.
+            </p>
+            <p class="text">
+                Estudié historia del arte. Conozco la diferencia entre un Woody original de los años 50 y una réplica barata. Puedo datar juguetes solo con verlos. Y sin embargo, aquí estoy, moviendo mis alas de utilería mientras los autos pasan y algunos niños se ríen. Es humillante. Patético, incluso.
+            </p>
+            <span class="highlight">"Pero las tiendas no se salvan con orgullo."</span>
+            <p class="text">
+                El alquiler no espera. Los distribuidores no dan crédito. Y el Bazar del Juguete de Al no es solo mi negocio, es mi identidad completa. Sin ella, ¿quién soy? Solo un tipo de mediana edad en un apartamento lleno de cajas. Así que me pongo el disfraz. Bailo. Sonrío detrás del pico de plástico. Y sobrevivo un día más.
+            </p>
+        </div>
+    </div>
+
+    <!-- Capítulo 2 -->
+    <div class="section" data-bg="bg3">
+        <div class="content">
+            <h2 class="chapter">II. La Llamada del Museo</h2>
+            <p class="text">
+                El museo de juguetes en Japón me contactó hace tres meses. Ofrecen cincuenta mil dólares por la colección completa de la Pandilla de Woody: Sheriff Woody, Jessie la Vaquerita, Bullseye y el Prospector Pete, todos en su empaque original o en condiciones de museo.
+            </p>
+            <p class="text">
+                Tengo tres de las cuatro piezas. Las encontré a lo largo de años, en subastas olvidadas, en áticos polvorientos. Las limpié, las restauré, las preservé como reliquias sagradas. Pero sin Woody, la colección no existe. Es como tener tres cuartos de un mapa del tesoro.
+            </p>
+            <p class="text">
+                Cincuenta mil dólares. Suficiente para pagar mis deudas, renovar la tienda, quizás incluso expandirme. Suficiente para dejar de ser el tipo del disfraz de pollo y convertirme en lo que siempre debí ser: un coleccionista respetado, un historiador del juguete, alguien importante.
+            </p>
+            <span class="highlight">"Solo me faltaba una pieza."</span>
+        </div>
+    </div>
+
+    <!-- Capítulo 3 -->
+    <div class="section" data-bg="bg4">
+        <div class="content">
+            <h2 class="chapter">III. La Venta de Garaje</h2>
+            <p class="text">
+                Lo vi entre el montón de objetos baratos, un destello naranja y amarillo que hizo que mi corazón dejara de latir. Sheriff Woody. Original. Años 50. Las costuras intactas, los colores vibrantes. Estaba ahí, tirado junto a lámparas viejas y libros usados, como si no fuera nada.
+            </p>
+            <p class="text">
+                Me acerqué con calma fingida. La mujer que atendía la venta, la madre del dueño supuse, organizaba otros artículos. Le ofrecí dinero. Cincuenta dólares por un juguete viejo. Era generoso. Más que justo.
+            </p>
+            <p class="text">
+                "No está en venta", dijo sin siquiera mirarlo bien. "Fue un error ponerlo ahí."
+            </p>
+            <p class="text">
+                ¿Un error? Ese Woody valía más que todo lo demás en esa venta de garaje combinado. ¿Y simplemente iba a volver a una caja de juguetes? ¿A ser arrastrado por patios, dejado bajo la lluvia, eventualmente olvidado en un ático o tirado a la basura?
+            </p>
+            <p class="text">
+                Cuando ella entró a la casa por un momento, lo tomé. Rápido. Limpio. La oportunidad estaba ahí. No fue robo, fue rescate. Fue preservación histórica. Fue salvar una pieza de arte de su destrucción inevitable.
+            </p>
+        </div>
+    </div>
+
+    <!-- Capítulo 4 -->
+    <div class="section" data-bg="bg5">
+        <div class="content">
+            <h2 class="chapter">IV. El Apartamento</h2>
+            <p class="text">
+                Mi apartamento está al cruzar la calle de la tienda. "El gran viaje", lo llamo con sarcasmo cuando tengo que ir allá un sábado. Son literalmente treinta segundos caminando, pero después de toda la semana con el disfraz de pollo, hasta eso se siente como una expedición.
+            </p>
+            <p class="text">
+                El lugar es un desastre, lo admito. Cajas de juguetes apiladas hasta el techo, envoltorios de comida rápida en la mesa, polvo acumulado en superficies que ya no recuerdo haber limpiado. Las vitrinas con mi colección son lo único de orden en el caos. Cada juguete perfectamente iluminado, cada pieza en su lugar exacto.
+            </p>
+            <span class="highlight">"Las colecciones no necesitan espacio limpio.<br>Necesitan devoción."</span>
+            <p class="text">
+                Woody descansa ahora en mi sofá, esperando. Tiene un brazo rasgado, el desgaste del tiempo y el uso descuidado. Pero tengo la solución. Llamé a Geri, el mejor restaurador de juguetes que conozco. Si alguien puede devolverle a Woody su gloria original, es él.
+            </p>
+        </div>
+    </div>
+
+    <!-- Capítulo 5 -->
+    <div class="section" data-bg="bg6">
+        <div class="content">
+            <h2 class="chapter">V. La Restauración</h2>
+            <p class="text">
+                Ver a Geri trabajar es como observar cirugía de precisión. Cada puntada, cada retoque de pintura, cada ajuste microscópico. Transforma el desgaste en perfección. Cuando termina, Woody parece recién salido de la fábrica en 1957.
+            </p>
+            <p class="text">
+                Lo coloco en la vitrina junto a los demás. La Pandilla de Woody, reunida por primera vez en décadas. Bajo las luces cuidadosamente posicionadas, son magníficos. Obras de arte. Historia preservada. Mi boleto a la salvación financiera y el respeto profesional.
+            </p>
+            <p class="text">
+                Los coleccionistas japoneses llegarán pronto. La transacción está lista. Todo está perfectamente alineado. Entonces, ¿por qué siento este vacío en el pecho?
+            </p>
+            <p class="text">
+                Miro a Woody detrás del cristal. Sus ojos pintados parecen mirar hacia otro lado, como buscando algo que ya no está ahí. Me pregunto si alguna vez fue feliz en ese garaje, entre lámparas viejas y libros usados. Me pregunto si extraña algo.
+            </p>
+            <span class="highlight">"Un juguete preservado es un juguete salvado.<br>¿O es un juguete atrapado?"</span>
+        </div>
+    </div>
+
+    <!-- Capítulo Final -->
+    <div class="section" data-bg="bg1">
+        <div class="content">
+            <h2 class="chapter">VI. Reflexión desde el Cristal</h2>
+            <p class="text">
+                He pasado toda mi vida adulta rescatando juguetes del olvido. Les doy valor, los limpio, los protejo. Los salvo de niños descuidados y padres que no entienden lo que tienen. Construyo santuarios de cristal donde pueden existir perfectos, eternos, intocables.
+            </p>
+            <p class="text">
+                Pero mientras contemplo mi colección completa, mi obra maestra, mi salvación, una pregunta me persigue: ¿Qué es un juguete si nadie juega con él? ¿Qué es un sheriff sin un niño al que proteger? ¿Acaso preservar es lo mismo que amar?
+            </p>
+            <p class="text">
+                Mañana vendrán por ellos. Los embalarán con cuidado, los transportarán al otro lado del mundo, los colocarán en vitrinas más grandes en un museo donde miles los admirarán pero nadie los tocará. Estarán seguros. Valiosos. Inmortalizados.
+            </p>
+            <p class="text">
+                Y completamente solos.
+            </p>
+            <span class="highlight">"Quizás mi padre tenía razón desde el principio.<br>Quizás nunca entendí para qué sirven los juguetes."</span>
+            <p class="text" style="margin-top: 4rem; font-style: italic; color: #999;">
+                Al McWhiggin desapareció de los registros públicos después del incidente con los juguetes. Algunos dicen que cerró su tienda. Otros, que todavía usa el traje de pollo en alguna otra ciudad. Nadie sabe con certeza. Solo quedan las vitrinas vacías y la pregunta que nunca pudo responder.
+            </p>
+        </div>
+    </div>
+
+    <!-- Credits Section -->
+    <div class="section" data-bg="bg1" style="min-height: 60vh;">
+        <div class="content" style="border-top: 1px solid #D6A100; padding-top: 3rem;">
+            <h2 class="chapter" style="font-size: 1.5rem; color: #D6A100; margin-bottom: 1.5rem;">Créditos</h2>
+            <p class="text" style="text-align: center; font-size: 1.2rem; line-height: 1.8; margin-bottom: 1rem;">
+                <strong>Trabajo de Variación de Punto de Vista del Narrador</strong>
+            </p>
+            <p class="text" style="text-align: center; font-size: 1.4rem; color: #8EC63F; margin-bottom: 0.5rem;">
+                Carolina Aguilar Ocampo
+            </p>
+            <p class="text" style="text-align: center; font-size: 1.4rem; color: #8EC63F; margin-bottom: 2rem;">
+                María José Jiménez
+            </p>
+            <p class="text" style="text-align: center; font-size: 1rem; color: #7B4F2C; font-style: italic;">
+                Basado en el personaje Al McWhiggin de Toy Story 2 © Pixar Animation Studios
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const contents = document.querySelectorAll('.content');
+        const titleContent = document.querySelector('.title-content');
+        const backgrounds = {
+            bg1: document.getElementById('bg1'),
+            bg2: document.getElementById('bg2'),
+            bg3: document.getElementById('bg3'),
+            bg4: document.getElementById('bg4'),
+            bg5: document.getElementById('bg5'),
+            bg6: document.getElementById('bg6')
+        };
+
+        // Parallax Elements
+        const layerCharacter = document.getElementById('layerCharacter');
+        const heroParallax = document.querySelector('.hero-parallax');
+
+        let currentBg = 'bg1';
+
+        // Mouse move parallax effect (like the reference site)
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            const rect = heroParallax.getBoundingClientRect();
+            
+            // Only apply effect when mouse is over hero section
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                // Calculate mouse position relative to center (-1 to 1)
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            }
+        });
+
+        // Smooth animation loop for parallax
+        function animateParallax() {
+            // Smooth interpolation
+            currentX += (mouseX - currentX) * 0.1;
+            currentY += (mouseY - currentY) * 0.1;
+
+            // Apply tilt effect (rotate on X and Y axis)
+            const maxTilt = 15; // degrees
+            const rotateY = currentX * maxTilt;
+            const rotateX = -currentY * maxTilt;
+
+            layerCharacter.style.transform = `
+                translate(-50%, -50%) 
+                rotateY(${rotateY}deg) 
+                rotateX(${rotateX}deg)
+                scale(1.05)
+            `;
+
+            requestAnimationFrame(animateParallax);
+        }
+
+        animateParallax();
+
+        function updateParallax() {
+            const scrolled = window.scrollY;
+            
+            // Show title content after hero section
+            const titleSection = document.querySelector('.title-section');
+            const titleRect = titleSection.getBoundingClientRect();
+            if (titleRect.top < window.innerHeight * 0.7) {
+                titleContent.classList.add('visible');
+            }
+            
+            // Regular sections
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const content = contents[index];
+                
+                if (rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3) {
+                    content.classList.add('visible');
+                } else {
+                    content.classList.remove('visible');
+                }
+
+                if (rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5) {
+                    const bgId = section.getAttribute('data-bg');
+                    if (bgId && bgId !== currentBg) {
+                        Object.values(backgrounds).forEach(bg => bg.style.opacity = '0');
+                        backgrounds[bgId].style.opacity = '1';
+                        currentBg = bgId;
+                    }
+                }
+            });
+
+            const indicator = document.querySelector('.scroll-indicator');
+            if (scrolled > 200) {
+                indicator.style.opacity = '0';
+            } else {
+                indicator.style.opacity = '0.7';
+            }
+        }
+
+        window.addEventListener('scroll', updateParallax);
+        updateParallax();
+    </script>
+</body>
+</html>
