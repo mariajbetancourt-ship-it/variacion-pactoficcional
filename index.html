@@ -18,6 +18,101 @@
             overflow-x: hidden;
         }
 
+        /* Initial Click Screen */
+        .click-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2C2C2C;
+            cursor: pointer;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .click-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .click-screen-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .click-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .click-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .toy-story-logo {
+            width: 400px;
+            max-width: 70vw;
+            margin-bottom: 3rem;
+            animation: float 4s ease-in-out infinite, pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 10px 40px rgba(214, 161, 0, 0.6));
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+            25% { transform: translateY(-15px) rotateZ(-2deg); }
+            50% { transform: translateY(-25px) rotateZ(0deg); }
+            75% { transform: translateY(-15px) rotateZ(2deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: drop-shadow(0 10px 40px rgba(214, 161, 0, 0.6)); }
+            50% { filter: drop-shadow(0 15px 60px rgba(214, 161, 0, 0.9)); }
+        }
+
+        .click-text {
+            font-size: 2rem;
+            color: #D6A100;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            animation: blink 2s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        .headphones-warning {
+            font-size: 1.2rem;
+            color: #8EC63F;
+            margin-top: 1rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .headphones-icon {
+            font-size: 2rem;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         /* Hero Parallax Section */
         .hero-parallax {
             height: 100vh;
@@ -33,7 +128,6 @@
             will-change: transform;
         }
 
-        /* Background clouds - static full screen */
         .layer-background {
             top: 0;
             left: 0;
@@ -49,7 +143,6 @@
             object-position: center;
         }
 
-        /* Al character - moves with cursor, centered */
         .layer-character {
             top: 50%;
             left: 50%;
@@ -57,7 +150,7 @@
             z-index: 2;
             width: 400px;
             max-width: 50vw;
-            transition: transform 0.15s ease-out;
+            transition: transform 0.2s ease-out;
             transform-style: preserve-3d;
             perspective: 1000px;
         }
@@ -69,7 +162,6 @@
             transform-style: preserve-3d;
         }
 
-        /* Gradient overlay for smooth transition */
         .gradient-overlay {
             position: absolute;
             bottom: 0;
@@ -80,7 +172,88 @@
             z-index: 3;
         }
 
-        /* Title Section - appears after parallax */
+        /* Introduction Section - Like reference page */
+        .intro-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2C2C2C;
+            padding: 4rem 2rem;
+        }
+
+        .intro-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .intro-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .intro-text {
+            text-align: left;
+        }
+
+        .intro-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            background: linear-gradient(45deg, #D6A100, #8EC63F, #D83227);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .intro-subtitle {
+            font-size: 1.5rem;
+            color: #8EC63F;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .intro-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #c0c0c0;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-author {
+            font-size: 1.1rem;
+            color: #D6A100;
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        .intro-image {
+            position: relative;
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            filter: drop-shadow(0 20px 60px rgba(0,0,0,0.8));
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .intro-image img:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Title Section */
         .title-section {
             min-height: 100vh;
             display: flex;
@@ -215,7 +388,17 @@
         }
 
         @media (max-width: 768px) {
+            .toy-story-logo { width: 300px; }
+            .click-text { font-size: 1.5rem; }
+            .headphones-warning { font-size: 1rem; }
             .layer-character { width: 300px; }
+            .intro-content { 
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .intro-title { font-size: 2.5rem; }
+            .intro-subtitle { font-size: 1.2rem; }
+            .intro-description { font-size: 1rem; }
             .title { font-size: 2.8rem; letter-spacing: 0.2rem; }
             .subtitle { font-size: 1.3rem; }
             .text { font-size: 1.1rem; line-height: 1.8; }
@@ -224,16 +407,29 @@
     </style>
 </head>
 <body>
+    <!-- Initial Click Screen -->
+    <div class="click-screen" id="clickScreen">
+        <div class="click-bg">
+            <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Background">
+        </div>
+        <div class="click-screen-content">
+            <img src="https://i.ibb.co/svYB0Y9n/1761501197580iqjpws0t-removebg-preview-1.png" alt="Toy Story Logo" class="toy-story-logo" id="interactiveLogo">
+            <p class="click-text">Haz clic para descubrir</p>
+            <p class="headphones-warning">
+                <span class="headphones-icon">🎧</span>
+                <span>Recomendamos usar audífonos</span>
+            </p>
+        </div>
+    </div>
+
     <!-- Hero Parallax Section with Images -->
     <div class="hero-parallax">
-        <!-- Background clouds -->
         <div class="parallax-layer layer-background" id="layerBackground">
             <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Toy Story Clouds">
         </div>
 
-        <!-- Al McWhiggin Character (moves with cursor) -->
         <div class="parallax-layer layer-character" id="layerCharacter">
-            <img src="https://i.ibb.co/svYB0Y9n/1761501197580iqjpws0t-removebg-preview-1.png" alt="Al McWhiggin">
+            <img src="https://i.ibb.co/svYB0Y9n/1761501197580iqjpws0t-removebg-preview-1.png" alt="Toy Story">
         </div>
 
         <div class="gradient-overlay"></div>
@@ -241,11 +437,23 @@
 
     <div class="scroll-indicator">↓</div>
 
-    <!-- Title Section -->
-    <div class="title-section">
-        <div class="title-content">
-            <h1 class="title">EL COLECCIONISTA</h1>
-            <p class="subtitle">La historia jamás contada de Al McWhiggin</p>
+    <!-- Introduction Section (like reference page) -->
+    <div class="intro-section">
+        <div class="intro-content" id="introContent">
+            <div class="intro-text">
+                <h1 class="intro-title">EL COLECCIONISTA</h1>
+                <p class="intro-subtitle">Una historia no contada</p>
+                <p class="intro-description">
+                    Detrás del disfraz de pollo y las vitrinas relucientes, Al McWhiggin guarda secretos que nunca fueron revelados. Esta es su historia, narrada desde su propia perspectiva: la de un coleccionista obsesionado, un hombre desesperado, y alguien que nunca entendió realmente para qué sirven los juguetes.
+                </p>
+                <p class="intro-description">
+                    Una exploración íntima del antagonista olvidado de Toy Story 2, donde la ambición, la soledad y la búsqueda de validación se entrelazan en un relato sobre lo que significa preservar versus amar.
+                </p>
+                <p class="intro-author">— Narrado desde el punto de vista de Al McWhiggin</p>
+            </div>
+            <div class="intro-image">
+                <img src="https://i.ibb.co/5hsSwvyJ/rfx-ai-mcwhiggin.png" alt="Al McWhiggin">
+            </div>
         </div>
     </div>
 
@@ -392,9 +600,11 @@
     </div>
 
     <script>
+        const clickScreen = document.getElementById('clickScreen');
+        const interactiveLogo = document.getElementById('interactiveLogo');
         const sections = document.querySelectorAll('.section');
         const contents = document.querySelectorAll('.content');
-        const titleContent = document.querySelector('.title-content');
+        const introContent = document.getElementById('introContent');
         const backgrounds = {
             bg1: document.getElementById('bg1'),
             bg2: document.getElementById('bg2'),
@@ -404,98 +614,37 @@
             bg6: document.getElementById('bg6')
         };
 
-        // Parallax Elements
         const layerCharacter = document.getElementById('layerCharacter');
         const heroParallax = document.querySelector('.hero-parallax');
 
         let currentBg = 'bg1';
-
-        // Mouse move parallax effect (like the reference site)
         let mouseX = 0;
         let mouseY = 0;
         let currentX = 0;
         let currentY = 0;
 
-        document.addEventListener('mousemove', (e) => {
-            const rect = heroParallax.getBoundingClientRect();
-            
-            // Only apply effect when mouse is over hero section
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                // Calculate mouse position relative to center (-1 to 1)
-                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-            }
+        // Click screen interaction
+        clickScreen.addEventListener('click', () => {
+            clickScreen.classList.add('hidden');
         });
 
-        // Smooth animation loop for parallax
-        function animateParallax() {
-            // Smooth interpolation
-            currentX += (mouseX - currentX) * 0.1;
-            currentY += (mouseY - currentY) * 0.1;
-
-            // Apply tilt effect (rotate on X and Y axis) - más pronunciado
-            const maxTilt = 25; // degrees - aumentado para efecto más dramático
-            const rotateY = currentX * maxTilt;
-            const rotateX = -currentY * maxTilt;
+        // Interactive logo on click screen
+        clickScreen.addEventListener('mousemove', (e) => {
+            const rect = clickScreen.getBoundingClientRect();
+            const x = (e.clientX / rect.width - 0.5) * 2;
+            const y = (e.clientY / rect.height - 0.5) * 2;
             
-            // Movimiento de traslación también
-            const maxMove = 30; // pixels
-            const moveX = currentX * maxMove;
-            const moveY = currentY * maxMove;
-
-            layerCharacter.style.transform = `
+            const rotateY = x * 20;
+            const rotateX = -y * 20;
+            const moveX = x * 20;
+            const moveY = y * 20;
+            
+            interactiveLogo.style.transform = `
                 translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))
                 rotateY(${rotateY}deg) 
                 rotateX(${rotateX}deg)
-                scale(1.05)
+                scale(1.1)
             `;
+        });
 
-            requestAnimationFrame(animateParallax);
-        }
-
-        animateParallax();
-
-        function updateParallax() {
-            const scrolled = window.scrollY;
-            
-            // Show title content after hero section
-            const titleSection = document.querySelector('.title-section');
-            const titleRect = titleSection.getBoundingClientRect();
-            if (titleRect.top < window.innerHeight * 0.7) {
-                titleContent.classList.add('visible');
-            }
-            
-            // Regular sections
-            sections.forEach((section, index) => {
-                const rect = section.getBoundingClientRect();
-                const content = contents[index];
-                
-                if (rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3) {
-                    content.classList.add('visible');
-                } else {
-                    content.classList.remove('visible');
-                }
-
-                if (rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5) {
-                    const bgId = section.getAttribute('data-bg');
-                    if (bgId && bgId !== currentBg) {
-                        Object.values(backgrounds).forEach(bg => bg.style.opacity = '0');
-                        backgrounds[bgId].style.opacity = '1';
-                        currentBg = bgId;
-                    }
-                }
-            });
-
-            const indicator = document.querySelector('.scroll-indicator');
-            if (scrolled > 200) {
-                indicator.style.opacity = '0';
-            } else {
-                indicator.style.opacity = '0.7';
-            }
-        }
-
-        window.addEventListener('scroll', updateParallax);
-        updateParallax();
-    </script>
-</body>
-</html>
+        clickScreen.
