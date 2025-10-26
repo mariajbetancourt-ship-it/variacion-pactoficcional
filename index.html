@@ -55,15 +55,18 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
-            width: 600px;
-            max-width: 70vw;
+            width: 400px;
+            max-width: 50vw;
             transition: transform 0.15s ease-out;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
         .layer-character img {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0 10px 40px rgba(0,0,0,0.9));
+            filter: drop-shadow(0 20px 60px rgba(0,0,0,0.9));
+            transform-style: preserve-3d;
         }
 
         /* Gradient overlay for smooth transition */
@@ -212,7 +215,7 @@
         }
 
         @media (max-width: 768px) {
-            .layer-character { width: 400px; }
+            .layer-character { width: 300px; }
             .title { font-size: 2.8rem; letter-spacing: 0.2rem; }
             .subtitle { font-size: 1.3rem; }
             .text { font-size: 1.1rem; line-height: 1.8; }
@@ -430,13 +433,18 @@
             currentX += (mouseX - currentX) * 0.1;
             currentY += (mouseY - currentY) * 0.1;
 
-            // Apply tilt effect (rotate on X and Y axis)
-            const maxTilt = 15; // degrees
+            // Apply tilt effect (rotate on X and Y axis) - más pronunciado
+            const maxTilt = 25; // degrees - aumentado para efecto más dramático
             const rotateY = currentX * maxTilt;
             const rotateX = -currentY * maxTilt;
+            
+            // Movimiento de traslación también
+            const maxMove = 30; // pixels
+            const moveX = currentX * maxMove;
+            const moveY = currentY * maxMove;
 
             layerCharacter.style.transform = `
-                translate(-50%, -50%) 
+                translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))
                 rotateY(${rotateY}deg) 
                 rotateX(${rotateX}deg)
                 scale(1.05)
