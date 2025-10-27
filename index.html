@@ -243,10 +243,6 @@
             }
         }
 
-        .hero-intro-divider {
-            display: none;
-        }
-
         .hero-intro-author {
             font-size: 1.4rem;
             color: #c0c0c0;
@@ -560,7 +556,7 @@
         window.addEventListener('scroll', function() {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
-            const scrollSection = windowHeight * 6; // Cambié de 4 a 6 para más lento
+            const scrollSection = windowHeight * 6;
             const progress = Math.min(scrollY / scrollSection, 1);
 
             // FASE 1: Título grande y centrado (0-0.2)
@@ -576,7 +572,7 @@
                 heroTitle.style.animation = 'none';
                 const phase = (progress - 0.2) / 0.15;
                 const fontSize = 9 - (phase * 5);
-                const topPos = 50 - (phase * 35);
+                const topPos = 50 - (phase * 20);
                 heroTitle.style.fontSize = fontSize + 'vw';
                 heroTitle.style.top = topPos + '%';
                 heroTitle.style.left = '50%';
@@ -585,7 +581,7 @@
             // FASE 3: Título pequeño arriba (0.35-0.7)
             else if (progress > 0.35 && progress <= 0.7) {
                 heroTitle.style.fontSize = '4vw';
-                heroTitle.style.top = '15%';
+                heroTitle.style.top = '30%';
                 heroTitle.style.left = '50%';
                 heroTitle.style.opacity = '1';
                 heroTitle.style.animation = 'none';
@@ -595,7 +591,7 @@
             if (progress >= 0.3 && progress <= 0.45) {
                 const phase = (progress - 0.3) / 0.15;
                 heroIntro.style.opacity = phase;
-                heroIntro.style.top = '58%';
+                heroIntro.style.top = '42%';
             } else if (progress < 0.3) {
                 heroIntro.style.opacity = '0';
             }
@@ -604,8 +600,8 @@
             if (progress >= 0.4 && progress <= 0.55) {
                 const phase = (progress - 0.4) / 0.15;
                 heroCharacter.style.opacity = phase;
-                heroCharacter.style.right = '-25%';
-                heroCharacter.style.bottom = '-10%';
+                heroCharacter.style.right = '-10%';
+                heroCharacter.style.bottom = '15%';
                 heroCharacter.style.transform = 'scale(0.7)';
             } else if (progress < 0.4) {
                 heroCharacter.style.opacity = '0';
@@ -622,9 +618,9 @@
             // FASE 7: Personaje se mueve y CRECE (0.55-0.75)
             if (progress > 0.55 && progress <= 0.75) {
                 const phase = (progress - 0.55) / 0.2;
-                const rightPos = -25 + (phase * 35); // De -25% a 10%
-                const bottomPos = -10 + (phase * 10); // De -10% a 0%
-                const scale = 0.35 + (phase * 0.25); // De 0.35 a 0.6 (SÚPER PEQUEÑO)
+                const rightPos = -10 + (phase * 20);
+                const bottomPos = 15 - (phase * 5);
+                const scale = 0.35 + (phase * 0.25);
                 
                 heroCharacter.style.right = rightPos + '%';
                 heroCharacter.style.bottom = bottomPos + '%';
@@ -635,11 +631,11 @@
                 heroTitle.style.opacity = Math.max(0, 1 - phase * 1.5);
             }
             
-            // FASE 8: Personaje en el centro PEQUEÑO (0.75-0.85) - PAUSA VISUAL
+            // FASE 8: Personaje en el centro PEQUEÑO (0.75-0.85)
             if (progress > 0.75 && progress <= 0.85) {
                 heroCharacter.style.right = '10%';
-                heroCharacter.style.bottom = '0%';
-                heroCharacter.style.transform = 'scale(0.6)'; // MUY PEQUEÑO
+                heroCharacter.style.bottom = '10%';
+                heroCharacter.style.transform = 'scale(0.6)';
                 heroCharacter.style.opacity = '1';
                 heroTitle.style.opacity = '0';
             }
@@ -647,11 +643,11 @@
             // FASE 9: Personaje continúa y se REDUCE MÁS (0.85-1.0)
             if (progress > 0.85) {
                 const phase = (progress - 0.85) / 0.15;
-                const rightPos = 10 + (phase * 30); // De 10% a 40%
-                const scale = 0.6 - (phase * 0.25); // De 0.6 a 0.35 (MINÚSCULO)
+                const rightPos = 10 + (phase * 30);
+                const scale = 0.6 - (phase * 0.25);
                 
                 heroCharacter.style.right = rightPos + '%';
-                heroCharacter.style.bottom = '0%';
+                heroCharacter.style.bottom = '10%';
                 heroCharacter.style.transform = 'scale(' + scale + ')';
                 heroCharacter.style.opacity = '1';
                 heroTitle.style.opacity = '0';
