@@ -596,31 +596,31 @@
                 heroIntro.style.opacity = '0';
             }
             
-            // FASE 5: Personaje entra desde esquina inferior derecha (0.4-0.55) - MÁS ARRIBA
-            if (progress >= 0.4 && progress <= 0.55) {
-                const phase = (progress - 0.4) / 0.15;
+            // FASE 5: Personaje entra PEGADO al subtítulo (0.4-0.5)
+            if (progress >= 0.4 && progress <= 0.5) {
+                const phase = (progress - 0.4) / 0.1;
                 heroCharacter.style.opacity = phase;
-                heroCharacter.style.right = '-10%';
-                heroCharacter.style.bottom = '25%';
-                heroCharacter.style.transform = 'scale(0.5)';
+                heroCharacter.style.right = '25%';
+                heroCharacter.style.bottom = '38%';
+                heroCharacter.style.transform = 'scale(0.35)';
             } else if (progress < 0.4) {
                 heroCharacter.style.opacity = '0';
             }
             
-            // FASE 6: Subtítulo desaparece (0.5-0.6)
-            if (progress >= 0.5 && progress <= 0.6) {
-                const phase = (progress - 0.5) / 0.1;
+            // FASE 6: Subtítulo desaparece mientras personaje crece (0.5-0.65)
+            if (progress >= 0.5 && progress <= 0.65) {
+                const phase = (progress - 0.5) / 0.15;
                 heroIntro.style.opacity = Math.max(0, 1 - phase);
-            } else if (progress > 0.6) {
+            } else if (progress > 0.65) {
                 heroIntro.style.opacity = '0';
             }
             
-            // FASE 7: Personaje se mueve hacia el centro y CRECE (0.55-0.75)
-            if (progress > 0.55 && progress <= 0.75) {
-                const phase = (progress - 0.55) / 0.2;
-                const rightPos = -10 + (phase * 20);
-                const bottomPos = 25 - (phase * 10);
-                const scale = 0.5 + (phase * 0.15);
+            // FASE 7: Personaje CRECE hacia el centro TAPANDO subtítulo (0.5-0.7)
+            if (progress > 0.5 && progress <= 0.7) {
+                const phase = (progress - 0.5) / 0.2;
+                const scale = 0.35 + (phase * 0.7);
+                const rightPos = 25 + (phase * 15);
+                const bottomPos = 38 - (phase * 8);
                 
                 heroCharacter.style.right = rightPos + '%';
                 heroCharacter.style.bottom = bottomPos + '%';
@@ -631,23 +631,13 @@
                 heroTitle.style.opacity = Math.max(0, 1 - phase * 1.5);
             }
             
-            // FASE 8: Personaje en posición central (0.75-0.85)
-            if (progress > 0.75 && progress <= 0.85) {
-                heroCharacter.style.right = '10%';
-                heroCharacter.style.bottom = '15%';
-                heroCharacter.style.transform = 'scale(0.65)';
-                heroCharacter.style.opacity = '1';
-                heroTitle.style.opacity = '0';
-            }
-            
-            // FASE 9: Personaje se REDUCE gradualmente (0.85-1.0)
-            if (progress > 0.85) {
-                const phase = (progress - 0.85) / 0.15;
-                const rightPos = 10 + (phase * 30);
-                const scale = 0.65 - (phase * 0.3);
+            // FASE 8: Personaje se REDUCE (0.7-1.0)
+            if (progress > 0.7) {
+                const phase = (progress - 0.7) / 0.3;
+                const scale = 1.05 - (phase * 0.7);
                 
-                heroCharacter.style.right = rightPos + '%';
-                heroCharacter.style.bottom = '15%';
+                heroCharacter.style.right = '40%';
+                heroCharacter.style.bottom = '30%';
                 heroCharacter.style.transform = 'scale(' + scale + ')';
                 heroCharacter.style.opacity = '1';
                 heroTitle.style.opacity = '0';
