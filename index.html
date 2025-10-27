@@ -276,265 +276,39 @@
             z-index: 5;
         }
 
-        .cinematic-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
-        }
-
-        .bg-image {
-            position: absolute;
-            top: 50%;
-            left: 5%;
-            transform: translateY(-50%);
-            width: 45%;
-            height: 65vh;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .bg-image::before {
+        /* Imagen de fondo para cada sección */
+        .section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.7);
-            z-index: 2;
-        }
-
-        .bg-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            filter: grayscale(0.3) brightness(0.5) contrast(1.2);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: -1;
         }
 
-        .content-side {
-            padding: 6rem 4rem;
-            position: relative;
-            z-index: 3;
-            max-width: 1200px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        .section-1::before {
+            background-image: url('https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png');
         }
 
-        .floating-image {
-            position: absolute;
-            z-index: 2;
-            overflow: hidden;
+        .section-2::before {
+            background-image: url('https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg');
         }
 
-        .floating-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.5);
-            z-index: 2;
+        .section-3::before {
+            background-image: url('https://i.ibb.co/jPvbP5Dh/Captura-de-pantalla-2025-10-27-161129.png');
         }
 
-        .floating-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            filter: grayscale(0.3) brightness(0.6) contrast(1.15);
+        .section-4::before {
+            background-image: url('https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg');
         }
 
-        .chapter-1 .floating-image {
-            width: 280px;
-            height: 360px;
-            right: 8%;
-            top: 50%;
-            transform: translateY(-50%) rotate(-2deg);
-        }
-
-        /* Estilos para capítulo 2 */
-        .chapter-2-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chapter-2 .side-image {
-            position: absolute;
-            right: 8%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 320px;
-            height: 240px;
-            z-index: 2;
-            overflow: hidden;
-            border: 3px solid rgba(214, 161, 0, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .chapter-2 .side-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.4);
-            z-index: 2;
-        }
-
-        .chapter-2 .side-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7) contrast(1.1);
-        }
-
-        /* Estilos para capítulo 3 */
-        .chapter-3-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chapter-3 .side-image {
-            position: absolute;
-            left: 8%;
-            top: 50%;
-            transform: translateY(-50%) rotate(1deg);
-            width: 300px;
-            height: 220px;
-            z-index: 2;
-            overflow: hidden;
-            border: 3px solid rgba(142, 198, 63, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .chapter-3 .side-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.4);
-            z-index: 2;
-        }
-
-        .chapter-3 .side-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7) contrast(1.1);
-        }
-
-        /* Estilos para capítulo 4 */
-        .chapter-4-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chapter-4 .side-image {
-            position: absolute;
-            right: 10%;
-            top: 50%;
-            transform: translateY(-50%) rotate(-2deg);
-            width: 280px;
-            height: 350px;
-            z-index: 2;
-            overflow: hidden;
-            border: 3px solid rgba(214, 161, 0, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .chapter-4 .side-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.4);
-            z-index: 2;
-        }
-
-        .chapter-4 .side-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7) contrast(1.1);
-        }
-
-        /* Estilos para capítulo 5 */
-        .chapter-5-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chapter-5 .image-left {
-            position: absolute;
-            left: 8%;
-            top: 35%;
-            transform: translateY(-50%) rotate(2deg);
-            width: 260px;
-            height: 190px;
-            z-index: 2;
-            overflow: hidden;
-            border: 3px solid rgba(142, 198, 63, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .chapter-5 .image-right {
-            position: absolute;
-            right: 8%;
-            top: 65%;
-            transform: translateY(-50%) rotate(-3deg);
-            width: 240px;
-            height: 170px;
-            z-index: 2;
-            overflow: hidden;
-            border: 3px solid rgba(214, 161, 0, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .chapter-5 .image-left::before,
-        .chapter-5 .image-right::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.4);
-            z-index: 2;
-        }
-
-        .chapter-5 .image-left img,
-        .chapter-5 .image-right img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7) contrast(1.1);
+        .section-5::before {
+            background-image: url('https://i.ibb.co/5XPBW4tS/Whats-App-Image-2025-10-26-at-9-17-57-PM-3.jpg');
         }
 
         .parallax-bg {
@@ -562,9 +336,6 @@
             transform: translateY(50px);
             transition: all 1s ease;
             padding: 2.5rem;
-            background: rgba(44, 44, 44, 0.85);
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
         }
 
         .content.visible {
@@ -576,8 +347,11 @@
             font-size: 1.3rem;
             line-height: 2.2;
             margin-bottom: 2rem;
-            color: #c0c0c0;
+            color: #e0e0e0;
             text-align: justify;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.9),
+                0 0 10px rgba(0, 0, 0, 0.8);
         }
 
         .highlight {
@@ -588,6 +362,9 @@
             margin: 3rem 0;
             font-style: italic;
             text-align: center;
+            text-shadow: 
+                2px 2px 6px rgba(0, 0, 0, 1),
+                0 0 15px rgba(0, 0, 0, 0.9);
         }
 
         .chapter {
@@ -606,29 +383,22 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-shadow: 
+                3px 3px 6px rgba(0, 0, 0, 1),
+                0 0 20px rgba(0, 0, 0, 0.9);
         }
 
         .chapter-number {
             position: absolute;
-            font-size: 28vw;
-            font-weight: 900;
+            font-size: 25vw;
+            color: rgba(152, 118, 84, 0.15);
+            font-weight: 700;
             line-height: 1;
             z-index: -1;
             right: -5%;
             top: 50%;
-            font-family: 'Georgia', serif;
-            color: #8a7560;
-            text-shadow: 
-                0 5px 0 #6d5d4a,
-                0 10px 0 #574a3a,
-                0 15px 0 #42362a,
-                0 20px 0 #2d2218,
-                0 25px 20px rgba(0, 0, 0, 0.3),
-                0 30px 40px rgba(0, 0, 0, 0.2),
-                0 40px 60px rgba(0, 0, 0, 0.15);
-            opacity: 0;
-            transform-origin: center center;
-            will-change: transform, opacity;
+            transform: translateY(-50%);
+            font-family: 'Times New Roman', serif;
         }
 
         .chapter-line {
@@ -652,37 +422,6 @@
             transform: translateX(0) !important;
         }
 
-        @media (max-width: 1024px) {
-            .chapter-1 .floating-image {
-                width: 200px;
-                height: 260px;
-                right: 5%;
-            }
-            .content-side {
-                padding: 4rem 2rem;
-            }
-            .bg-image {
-                width: 50%;
-            }
-            .chapter-2 .side-image {
-                width: 240px;
-                height: 180px;
-            }
-            .chapter-3 .side-image {
-                width: 220px;
-                height: 160px;
-            }
-            .chapter-4 .side-image {
-                width: 200px;
-                height: 250px;
-            }
-            .chapter-5 .image-left,
-            .chapter-5 .image-right {
-                width: 180px;
-                height: 130px;
-            }
-        }
-
         @media (max-width: 768px) {
             .hero-title { 
                 font-size: 10vw;
@@ -693,33 +432,12 @@
             }
             .text { font-size: 1.1rem; line-height: 1.8; }
             .chapter { font-size: 8vw; }
-            .chapter-number { font-size: 38vw; right: -10%; }
+            .chapter-number { font-size: 35vw; right: -10%; }
             .chapter-line.move-right { transform: translateX(-100px); }
             .chapter-line.move-left { transform: translateX(100px); }
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
             .content { padding: 1.5rem; }
-            .content-side { padding: 3rem 1.5rem; }
-            .chapter-1 .floating-image {
-                width: 150px;
-                height: 200px;
-                right: 3%;
-            }
-            .bg-image {
-                width: 90%;
-                left: 5%;
-                height: 40vh;
-                top: 20%;
-            }
-            .chapter-2 .side-image,
-            .chapter-3 .side-image,
-            .chapter-4 .side-image {
-                display: none;
-            }
-            .chapter-5 .image-left,
-            .chapter-5 .image-right {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -763,37 +481,27 @@
         <div class="parallax-bg bg5" id="bg5" style="opacity: 0;"></div>
         <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
 
-        <div class="section chapter-1" data-bg="bg2">
-            <div class="cinematic-layout">
-                <div class="bg-image">
-                    <img src="https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png" alt="Bazar del Juguete de Al">
-                </div>
-                <div class="content-side">
-                    <div class="content">
-                        <h2 class="chapter">
-                            <span class="chapter-number">1</span>
-                            <span class="chapter-line move-right">EL DISFRAZ</span>
-                            <span class="chapter-line move-left">DE LA DESESPERACIÓN</span>
-                        </h2>
-                        <p class="text">
-                            El traje de pollo pesa más de lo que la gente imagina. No solo físicamente, el plástico rígido, las plumas sintéticas que rascan, sino emocionalmente. Cada mañana, cuando me lo pongo frente al Bazar del Juguete de Al, siento cómo lo que queda de mi dignidad se desvanece bajo las capas de espuma amarilla.
-                        </p>
-                        <p class="text">
-                            Soy dueño de la juguetería más grande del área. Conozco la diferencia entre un Woody original de los años 50 y una réplica barata. Puedo datar juguetes solo con verlos. Y sin embargo, aquí estoy, cacareando y moviendo mis alas de utilería mientras los niños se ríen y sus padres desvían la mirada. Es humillante. Patético, incluso.
-                        </p>
-                        <span class="highlight">"Pero el orgullo no paga el alquiler.<br>El dinero sí."</span>
-                        <p class="text">
-                            Los distribuidores llaman cada semana exigiendo pagos. El banco amenaza con ejecutar la hipoteca. Y el Bazar del Juguete de Al no es solo mi negocio, es todo lo que tengo. Sin ella, ¿quién soy? Solo un tipo gordo de mediana edad en un apartamento sucio lleno de cajas. Así que me pongo el maldito disfraz. Bailo como idiota. Sonrío detrás del pico de plástico. Y sobrevivo un día más, sudando dentro de este traje que nunca lavo.
-                        </p>
-                    </div>
-                </div>
-                <div class="floating-image">
-                    <img src="https://i.ibb.co/0y2w40KS/dd7f67600189779b8352e494c3028d96.jpg" alt="Pollo comercial">
-                </div>
+        <div class="section section-1" data-bg="bg2">
+            <div class="content">
+                <h2 class="chapter">
+                    <span class="chapter-number">1</span>
+                    <span class="chapter-line move-right">EL DISFRAZ</span>
+                    <span class="chapter-line move-left">DE LA DESESPERACIÓN</span>
+                </h2>
+                <p class="text">
+                    El traje de pollo pesa más de lo que la gente imagina. No solo físicamente, el plástico rígido, las plumas sintéticas que rascan, sino emocionalmente. Cada mañana, cuando me lo pongo frente al Bazar del Juguete de Al, siento cómo lo que queda de mi dignidad se desvanece bajo las capas de espuma amarilla.
+                </p>
+                <p class="text">
+                    Soy dueño de la juguetería más grande del área. Conozco la diferencia entre un Woody original de los años 50 y una réplica barata. Puedo datar juguetes solo con verlos. Y sin embargo, aquí estoy, cacareando y moviendo mis alas de utilería mientras los niños se ríen y sus padres desvían la mirada. Es humillante. Patético, incluso.
+                </p>
+                <span class="highlight">"Pero el orgullo no paga el alquiler.<br>El dinero sí."</span>
+                <p class="text">
+                    Los distribuidores llaman cada semana exigiendo pagos. El banco amenaza con ejecutar la hipoteca. Y el Bazar del Juguete de Al no es solo mi negocio, es todo lo que tengo. Sin ella, ¿quién soy? Solo un tipo gordo de mediana edad en un apartamento sucio lleno de cajas. Así que me pongo el maldito disfraz. Bailo como idiota. Sonrío detrás del pico de plástico. Y sobrevivo un día más, sudando dentro de este traje que nunca lavo.
+                </p>
             </div>
         </div>
 
-        <div class="section" data-bg="bg3">
+        <div class="section section-2" data-bg="bg3">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">2</span>
@@ -814,20 +522,14 @@
                     El Sr. Konishi está impaciente. Sus emails son cada vez más urgentes. "¿Cuándo tendrá la colección completa, Sr. McWhiggin?" Sudo solo de leer sus mensajes. Si pierdo este trato, si alguien más encuentra un Woody primero... No. No puedo pensar en eso. Este trato me salvará. Tiene que salvarme.
                 </p>
             </div>
-            <div class="side-image">
-                <img src="https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg" alt="Colección parcial de El Rodeo de Woody">
-            </div>
         </div>
 
-        <div class="section chapter-3" data-bg="bg4">
+        <div class="section section-3" data-bg="bg4">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">3</span>
-                    <div class="chapter-text">
-                        <span class="chapter-line move-right">LA VENTA</span>
-                        <span class="chapter-line move-left">DE</span>
-                        <span class="chapter-line move-right">GARAJE</span>
-                    </div>
+                    <span class="chapter-line move-right">LA VENTA</span>
+                    <span class="chapter-line move-left">DE GARAJE</span>
                 </h2>
                 <p class="text">
                     Lo vi entre el montón de objetos baratos en esa venta de garaje, un destello naranja y amarillo que hizo que mi corazón se detuviera. Sheriff Woody. Original. Años 50. Costuras intactas, colores vibrantes, rostro pintado a mano. Estaba ahí, tirado entre lámparas rotas y libros viejos como si fuera basura.
@@ -836,31 +538,16 @@
                     Me acerqué intentando actuar con calma, pero mis manos temblaban. Lo examiné rápidamente. Rostro original pintado a mano. Chaleco teñido al natural y cosido a manta. Mmm, un pequeño desgarro. Se puede arreglar. Y entonces lo vi, ¡el sombrero! ¡Un sombrero de polivinilo cosido a mano! ¡Lo encontré! ¡Lo encontré, lo encontré!
                 </p>
                 <p class="text">
-                    La mujer que atendía, la madre del dueño supongo, ni siquiera lo miraba. Le ofrecí dinero. "Pagaré 50 centavos por esta basura." Intenté que sonara desinteresado, casual.
-                </p>
-                <p class="text">
-                    "Pertenece a mi hijo", dijo ella firmemente, alejando a Woody.
-                </p>
-                <p class="text">
-                    ¡No! Necesitaba ese Woody. Le ofrecí más. Cincuenta dólares. "¡Todo está en venta! ¡Lo intercambiamos! ¿Te gusta mi reloj?" Le mostré mi Seiko, desesperado. Pero ella se negó. "Lo siento." Incluso guardó a Woody en una alcancía con llave.
-                </p>
-                <p class="text">
-                    Me estaba poniendo nervioso, sudando. ¿Ese Woody valía una fortuna y simplemente iba a volver a las manos sucias de algún niño? ¿A ser arrastrado por el patio, dejado bajo la lluvia, masticado por el perro? ¡Es una pieza de colección de los años 50! ¡No un juguete para jugar!
+                    La mujer que atendía, la madre del dueño supongo, ni siquiera lo miraba. Le ofrecí dinero. "Pagaré 50 centavos por esta basura." Intenté que sonara desinteresado, casual. "Pertenece a mi hijo", dijo ella firmemente, alejando a Woody.
                 </p>
                 <p class="text">
                     Entonces ella entró a la casa por un momento y vi mi oportunidad. Pateé una patineta contra unas cajas, creando el caos perfecto. Mientras ella estaba distraída, abrí esa alcancía de cerdito y tomé a Woody. Rápido. Limpio.
                 </p>
-                <p class="text">
-                    Salí de allí casi corriendo, con Woody en mi mochila, el corazón latiéndome como loco. Al llegar al auto, me temblaban tanto las manos que casi no podía poner la llave en la ignición. Pero lo logré. ¡Lo conseguí!
-                </p>
                 <span class="highlight">"¡Lo encontré! ¡Finalmente lo encontré!<br>¡Voy a ser rico!"</span>
-            </div>
-            <div class="side-image">
-                <img src="https://i.ibb.co/jPvbP5Dh/Captura-de-pantalla-2025-10-27-161129.png" alt="Al examinando a Woody en la venta de garaje">
             </div>
         </div>
 
-        <div class="section chapter-4" data-bg="bg5">
+        <div class="section section-4" data-bg="bg5">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">4</span>
@@ -871,28 +558,16 @@
                     Mi apartamento está literalmente al cruzar la calle de la tienda. Treinta segundos caminando. Y aun así me quejo cada vez que tengo que conducir hasta el trabajo los sábados. Es ridículo, lo sé. Pero después de toda una semana sudando dentro del maldito traje de pollo, hasta cruzar la calle se siente como una expedición al Everest.
                 </p>
                 <p class="text">
-                    El lugar es un desastre total. Admitámoslo. Cajas de juguetes apiladas hasta el techo, bolsas de comida rápida en cada superficie, bocadillos de queso derramados en el sofá donde duermo cada noche, con la ropa de trabajo puesta porque quién tiene tiempo para pijamas. Hay polvo en todo excepto en mis vitrinas de colección.
+                    El lugar es un desastre total. Admitámoslo. Cajas de juguetes apiladas hasta el techo, bolsas de comida rápida en cada superficie, bocadillos de queso derramados en el sofá donde duermo cada noche. Hay polvo en todo excepto en mis vitrinas de colección.
                 </p>
                 <span class="highlight">"Las colecciones necesitan perfección.<br>Yo solo necesito funcionar."</span>
                 <p class="text">
-                    Las vitrinas son lo único impecable en este caos. Cada juguete bajo luz LED perfectamente calibrada, cada pieza en su lugar exacto, protegida del polvo, la humedad, los dedos grasientos. Manejo todo con guantes. Siempre con guantes.
+                    Pero entonces descubro el problema: ¡el brazo de Woody está desgarrado! Entro en pánico. Sudo. Me tiemblan las manos. Sin el brazo en perfecto estado, el trato se cae. Todo se cae. Llamo a Geri inmediatamente. Necesito que ese brazo esté perfecto.
                 </p>
-                <p class="text">
-                    Pero entonces descubro el problema: ¡el brazo de Woody está desgarrado! ¡El maldito brazo! Entro en pánico. Sudo. Me tiemblan las manos. "¡¿Qué?! ¡¿Dónde está su brazo?!" grito solo en mi apartamento. Sin el brazo en perfecto estado, el trato se cae. Todo se cae.
-                </p>
-                <p class="text">
-                    Llamo a Geri inmediatamente. "¡Soy yo! ¡Es Al! ¡Tengo una emergencia aquí! ¡Necesito que vengas mañana temprano! ¡Es lo primero que harás por la mañana!" Y cuelgo antes de que pueda protestar. Necesito que ese brazo esté perfecto.
-                </p>
-                <p class="text">
-                    Esa noche no puedo dormir bien. Me quedo en el sofá, con el brazo de Woody en mi bolsillo, rodeado de bolsas vacías de bocadillos. Cada ruido me despierta sobresaltado. "¡No, oficial! ¡Lo juro!" grito en medio de una pesadilla donde la policía me arresta por ladrón. Sudo tanto que mi camisa queda empapada.
-                </p>
-            </div>
-            <div class="side-image">
-                <img src="https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg" alt="Woody en la vitrina">
             </div>
         </div>
 
-        <div class="section chapter-5" data-bg="bg6">
+        <div class="section section-5" data-bg="bg6">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">5</span>
@@ -900,36 +575,15 @@
                     <span class="chapter-line move-left">RESTAURACIÓN</span>
                 </h2>
                 <p class="text">
-                    Al día siguiente, Geri llega y trabaja en Woody. Cada puntada me pone más nervioso todavía. Cuando termina, lo aparto para examinar a Woody yo mismo. "¡Es increíble! ¡Eres un genio! ¡Está como nuevo!" Perfecto. Puedo respirar de nuevo.
+                    Al día siguiente, Geri llega y trabaja en Woody. Cada puntada me pone más nervioso. Cuando termina, lo examino. "¡Es increíble! ¡Eres un genio! ¡Está como nuevo!" Perfecto. Puedo respirar de nuevo.
                 </p>
                 <p class="text">
-                    Corro a colocar a Woody en la vitrina junto a los demás. El elenco de El Rodeo de Woody, reunido por primera vez en décadas. Empiezo a tomar fotos frenéticamente con mi cámara, riéndome como un maníaco. Necesito enviarlas al Sr. Konishi inmediatamente.
-                </p>
-                <p class="text">
-                    Voy corriendo a la tienda, a mi oficina. Estoy tan emocionado que casi tropiezo. Meto las fotos en el fax. Suena el teléfono. "¿Qué?" contesto bruscamente. Pero entonces reconozco la voz. "¡Oh, oh, Sr. Konishi! ¡Sí! Tengo las fotos aquí mismo! De hecho, estoy en el auto ahora mismo, camino a la oficina para enviárselas por fax. ¡Estoy pasando por un túnel! ¡Se está cortando la señal!"
-                </p>
-                <p class="text">
-                    Mientras le envío las fotos, mi voz tiembla de emoción. "Y la pièce de résistance! Le prometo que la colección será la joya de la corona de su museo. Y ahora que tengo su atención, imagínese si agregáramos otro cero al precio, ¿eh?"
-                </p>
-                <p class="text">
-                    "¡No me importa! ¡Sí, sí, sí, sí! ¡Pagaré lo que sea! ¡Lo que sea!" responde él. "¡¿QUÉ?! ¡SÍ! ¡SÍ, SÍ, SÍ! ¡Trato hecho! ¡Estaré en el próximo vuelo a Japón!" Cuelgo y me toco juguetonamente el bigote. "Douitashimashite." Creo que significa de nada en japonés. "¡Al, vas a ser rico! ¡Rico! ¡Ricooooo!" grito bailando torpemente en mi oficina.
-                </p>
-                <p class="text">
-                    Entonces empieza la pesadilla logística. Llamo a la empresa de envíos. "¿Cuánto cuesta enviar seis paquetes a Japón por mensajería urgente?" Espero. "¿QUÉ? Eso es en yenes, ¿verdad?" "No, dólares." "¡¿DÓLARES?! ¡Ustedes se están aprovechando de la gente que tiene prisa! ¿Lo sabías?" Pero acepto. No tengo opción. "¡Tendrá las cosas esperando en el lobby y más te vale que estés aquí en 15 minutos porque tengo que tomar un avión! ¿Me oyes?"
-                </p>
-                <p class="text">
-                    Corro de regreso al apartamento. "Mira la hora. Voy a llegar tarde. ¡No puedo perder este vuelo!" Empiezo a empacar frenéticamente. "Billetera, llaves, boletos. Pasaporte, cecina. Muy caro por allá." Me huelo la axila. "Puedo saltarme la ducha." Guardo todo en una maleta verde, sudando, nervioso.
+                    Corro a colocar a Woody en la vitrina junto a los demás. El elenco de El Rodeo de Woody, reunido por primera vez en décadas. Empiezo a tomar fotos frenéticamente. Necesito enviarlas al Sr. Konishi inmediatamente.
                 </p>
                 <span class="highlight">"Todo tiene que salir perfecto.<br>Mi fortuna depende de ello."</span>
                 <p class="text">
-                    En el aeropuerto, le grito al encargado de equipaje. "¡Oye, aviador! ¡El contenido de esa maleta vale más de lo que ganas en un año! ¿Lo tienes, amigo?" "Lo entendemos, señor." "¡Ten cuidado! ¿Tienes una etiqueta de frágil o algo para ponerle? ¡Porque sé lo que pasa allá atrás! ¡Una vez tuve una caja de galletas que me devolvieron hechas migajas!"
+                    En el aeropuerto, le grito al encargado de equipaje. "¡Oye, aviador! ¡El contenido de esa maleta vale más de lo que ganas en un año!" Todo está listo. Japón me espera. La riqueza me espera. Mi nueva vida me espera.
                 </p>
-            </div>
-            <div class="image-left">
-                <img src="https://i.ibb.co/5XPBW4tS/Whats-App-Image-2025-10-26-at-9-17-57-PM-3.jpg" alt="Colección completa de El Rodeo de Woody">
-            </div>
-            <div class="image-right">
-                <img src="https://i.ibb.co/0jSsZ2XW/Whats-App-Image-2025-10-26-at-9-17-56-PM-1.jpg" alt="Fotos de la colección">
             </div>
         </div>
 
@@ -941,38 +595,23 @@
                     <span class="chapter-line move-right">EL CRISTAL</span>
                 </h2>
                 <p class="text">
-                    Nunca me dejaron jugar con juguetes cuando era niño. Mis padres decían que los rompería, que los ensuciaría, que no los merecía. Así que solo podía mirarlos en las tiendas, presionando mi cara grasosa contra los vidrios, deseando poder tocarlos.
+                    Nunca me dejaron jugar con juguetes cuando era niño. Mis padres decían que los rompería. Así que solo podía mirarlos en las tiendas, presionando mi cara contra los vidrios, deseando poder tocarlos.
                 </p>
                 <p class="text">
-                    Cuando crecí y finalmente tuve dinero, compré todos los juguetes que quise. Pero nunca para jugar. Para guardar. Para coleccionar. Para tener algo que nadie pudiera quitarme. Los mantengo en vitrinas, perfectos, intocables, eternos. Bajo llave. Seguros.
-                </p>
-                <p class="text">
-                    Construí un imperio vendiendo juguetes, pero nunca entendí para qué sirven realmente. Para mí son inversiones, activos, objetos de valor monetario. Nada más. Ver a los niños jugar con ellos me molesta. Los están arruinando. Los están devaluando.
+                    Cuando crecí y finalmente tuve dinero, compré todos los juguetes que quise. Pero nunca para jugar. Para guardar. Para coleccionar. Para tener algo que nadie pudiera quitarme. Los mantengo en vitrinas, perfectos, intocables, eternos.
                 </p>
                 <span class="highlight">"Un juguete en una vitrina vale miles.<br>Un juguete en manos de un niño no vale nada."</span>
                 <p class="text">
-                    Pero ahora, sentado en este avión rumbo a Japón, con mi maleta en la bodega, algo se siente extraño. Vacío. Debería estar eufórico. Voy a vender la colección de mi vida por una fortuna. Voy a ser rico. Respetado. Exitoso.
-                </p>
-                <p class="text">
-                    Y sin embargo, pienso en Woody. En cómo sus ojos pintados parecían buscar algo cuando lo guardé en la maleta. En cómo ese niño —Andy, creo que se llamaba— lo mantenía en su cama, lo llevaba a todas partes, jugaba con él todos los días. Woody estaba gastado, desgarrado, imperfecto.
-                </p>
-                <p class="text">
-                    Pero quizás... quizás ahí está el error. Quizás mi padre tenía razón cuando decía que nunca entendería los juguetes. Quizás toda mi vida he estado guardando tesoros en cajas, sin darme cuenta de que un tesoro sin usar es solo un objeto muerto.
+                    Pero quizás... quizás ahí está el error. Quizás toda mi vida he estado guardando tesoros en cajas, sin darme cuenta de que un tesoro sin usar es solo un objeto muerto.
                 </p>
                 <p class="text" style="margin-top: 4rem; font-style: italic; color: #999;">
-                    Al McWhiggin llegó a Japón solo para descubrir que su maleta estaba vacía. Los juguetes habían desaparecido. El Sr. Konishi canceló el trato inmediatamente. Al regresó a un negocio en quiebra, a deudas que no podía pagar, a un apartamento sucio al otro lado de una tienda que pronto se convertiría en un negocio de todo a un dólar.
-                </p>
-                <p class="text" style="margin-top: 2rem; font-style: italic; color: #999;">
-                    Algunos dicen que todavía usa el traje de pollo en otras ciudades, intentando vender juguetes baratos. Otros que vive con su madre, rodeado de cajas de colecciones que nunca podrá vender. Nadie sabe con certeza. Solo quedan las vitrinas vacías, las deudas impagas, y la pregunta que nunca quiso responder: ¿Qué vale más, un juguete perfecto en una caja, o uno gastado en las manos de un niño que lo ama?
-                </p>
-                <p class="text" style="margin-top: 2rem; font-style: italic; color: #999;">
-                    Al nunca encontró la respuesta. Y quizás, esa fue siempre su condena.
+                    Al McWhiggin llegó a Japón solo para descubrir que su maleta estaba vacía. Los juguetes habían desaparecido. El Sr. Konishi canceló el trato inmediatamente. Al regresó a un negocio en quiebra, a deudas que no podía pagar. Al nunca encontró la respuesta. Y quizás, esa fue siempre su condena.
                 </p>
             </div>
         </div>
 
         <div class="section" data-bg="bg1" style="min-height: 60vh;">
-            <div class="content" style="border-top: 1px solid #D6A100; padding-top: 3rem; background: rgba(0, 0, 0, 0.6);">
+            <div class="content" style="border-top: 1px solid #D6A100; padding-top: 3rem;">
                 <h2 class="chapter" style="font-size: 1.5rem;">Créditos</h2>
                 <p class="text" style="text-align: center; font-size: 1.2rem;">
                     <strong>Trabajo de Variación de Punto de Vista del Narrador</strong>
@@ -1101,26 +740,6 @@
                     chapterLines.forEach(line => {
                         line.classList.remove('visible');
                     });
-                }
-                
-                const chapterNumber = section.querySelector('.chapter-number');
-                if (chapterNumber) {
-                    if (rect.top < windowHeight && rect.bottom > 0) {
-                        const sectionProgress = Math.max(0, Math.min(1, (windowHeight - rect.top) / (windowHeight * 1.2)));
-                        
-                        const opacity = Math.pow(sectionProgress, 0.8) * 0.5;
-                        const translateY = 200 - (sectionProgress * 250);
-                        const scale = 0.6 + (sectionProgress * 0.4);
-                        
-                        chapterNumber.style.opacity = opacity;
-                        chapterNumber.style.transform = `translateY(${translateY}%) scale(${scale})`;
-                    } else if (rect.top >= windowHeight) {
-                        chapterNumber.style.opacity = '0';
-                        chapterNumber.style.transform = 'translateY(200%) scale(0.6)';
-                    } else {
-                        chapterNumber.style.opacity = '0';
-                        chapterNumber.style.transform = 'translateY(-100%) scale(1)';
-                    }
                 }
                 
                 const bgIndex = parseInt(section.getAttribute('data-bg')?.replace('bg', '') || '1') - 1;
