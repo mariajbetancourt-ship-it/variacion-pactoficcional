@@ -280,91 +280,50 @@
             content: '';
             position: absolute;
             width: 500px;
-            height: 580px;
-            background-color: #f5f5f0;
-            padding: 20px 20px 80px 20px;
-            box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.4),
-                0 5px 15px rgba(0, 0, 0, 0.3);
+            height: 500px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
             opacity: 0.3;
             z-index: -1;
             transition: all 0.3s ease;
-        }
-
-        .section::after {
-            content: '';
-            position: absolute;
-            width: 460px;
-            height: 460px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.4;
-            z-index: -1;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .section-1::before {
+            background-image: url('https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png');
             top: 10%;
             right: 5%;
             transform: rotate(5deg);
         }
 
-        .section-1::after {
-            background-image: url('https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png');
-            top: calc(10% + 60px);
-            right: calc(5% + 20px);
-            transform: rotate(5deg);
-        }
-
         .section-2::before {
+            background-image: url('https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg');
             bottom: 10%;
             left: 5%;
             transform: rotate(-4deg);
         }
 
-        .section-2::after {
-            background-image: url('https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg');
-            bottom: calc(10% + 60px);
-            left: calc(5% + 20px);
-            transform: rotate(-4deg);
-        }
-
         .section-3::before {
+            background-image: url('https://i.ibb.co/jPvbP5Dh/Captura-de-pantalla-2025-10-27-161129.png');
             top: 15%;
             left: 8%;
             transform: rotate(3deg);
         }
 
-        .section-3::after {
-            background-image: url('https://i.ibb.co/jPvbP5Dh/Captura-de-pantalla-2025-10-27-161129.png');
-            top: calc(15% + 60px);
-            left: calc(8% + 20px);
-            transform: rotate(3deg);
-        }
-
         .section-4::before {
+            background-image: url('https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg');
             top: 12%;
             right: 8%;
             transform: rotate(-6deg);
         }
 
-        .section-4::after {
-            background-image: url('https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg');
-            top: calc(12% + 60px);
-            right: calc(8% + 20px);
-            transform: rotate(-6deg);
-        }
-
         .section-5::before {
+            background-image: url('https://i.ibb.co/5XPBW4tS/Whats-App-Image-2025-10-26-at-9-17-57-PM-3.jpg');
             bottom: 12%;
             right: 10%;
-            transform: rotate(5deg);
-        }
-
-        .section-5::after {
-            background-image: url('https://i.ibb.co/5XPBW4tS/Whats-App-Image-2025-10-26-at-9-17-57-PM-3.jpg');
-            bottom: calc(12% + 60px);
-            right: calc(10% + 20px);
             transform: rotate(5deg);
         }
 
@@ -495,6 +454,67 @@
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
             .content { padding: 1.5rem; }
+            
+            .section::before {
+                width: 280px;
+                height: 340px;
+                padding: 15px 15px 60px 15px;
+            }
+            
+            .section::after {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .section-1::before {
+                top: 8%;
+                right: 3%;
+            }
+            
+            .section-1::after {
+                top: calc(8% + 45px);
+                right: calc(3% + 15px);
+            }
+            
+            .section-2::before {
+                bottom: 8%;
+                left: 3%;
+            }
+            
+            .section-2::after {
+                bottom: calc(8% + 45px);
+                left: calc(3% + 15px);
+            }
+            
+            .section-3::before {
+                top: 12%;
+                left: 3%;
+            }
+            
+            .section-3::after {
+                top: calc(12% + 45px);
+                left: calc(3% + 15px);
+            }
+            
+            .section-4::before {
+                top: 10%;
+                right: 3%;
+            }
+            
+            .section-4::after {
+                top: calc(10% + 45px);
+                right: calc(3% + 15px);
+            }
+            
+            .section-5::before {
+                bottom: 10%;
+                right: 3%;
+            }
+            
+            .section-5::after {
+                bottom: calc(10% + 45px);
+                right: calc(3% + 15px);
+            }
         }
     </style>
 </head>
