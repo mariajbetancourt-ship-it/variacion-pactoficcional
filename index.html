@@ -16,7 +16,7 @@
             font-family: 'Georgia', serif;
             background: #2C2C2C;
             color: #e0e0e0;
-            overflow: hidden; /* Oculta el scrollbar hasta que se hace clic */
+            overflow: hidden;
         }
 
         body.started {
@@ -116,9 +116,9 @@
             pointer-events: auto;
         }
 
-        /* Sección de Scroll (la que impulsa la animación) */
+        /* Sección de Scroll */
         .hero-scroll-section {
-            height: 600vh; /* Altura grande para un scroll largo */
+            height: 600vh;
             position: relative;
             background: #2C2C2C;
         }
@@ -149,7 +149,7 @@
             pointer-events: none;
             text-align: center;
             line-height: 1.1;
-            transition: all 0.1s linear; /* Transición para el scroll */
+            transition: all 0.1s linear;
             animation: titlePulse 4s ease-in-out infinite;
             max-width: 90vw;
             text-shadow: 
@@ -173,14 +173,13 @@
         .hero-character {
             position: absolute;
             left: 50%; 
-            bottom: -50%; /* Fuera de la vista por abajo inicialmente */
+            bottom: -50%;
             transform: translateX(-50%) scale(0.5); 
             height: 75vh;
             opacity: 0;
             z-index: 3;
             transition: all 0.1s linear;
             transform-origin: bottom center; 
-            /* Máscara para difuminar la parte inferior */
             mask-image: linear-gradient(to top, 
                 rgba(0,0,0,1) 0%, 
                 rgba(0,0,0,1) 40%, 
@@ -283,7 +282,7 @@
             justify-content: center;
             position: relative;
             padding: 4rem 2rem;
-            z-index: 5; /* Asegura que el contenido esté sobre el parallax */
+            z-index: 5;
         }
 
         /* Fondos Parallax */
@@ -297,7 +296,7 @@
             transition: opacity 0.8s ease;
         }
 
-        /* Colores de Fondo (para simular ambientes) */
+        /* Colores de Fondo */
         .bg1 { background: radial-gradient(circle at 30% 50%, #3d3520 0%, #2C2C2C 100%); }
         .bg2 { background: radial-gradient(circle at 70% 50%, #4a2e2e 0%, #2C2C2C 100%); }
         .bg3 { background: radial-gradient(circle at 50% 30%, #3d4a2e 0%, #2C2C2C 100%); }
@@ -312,12 +311,7 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 1s ease;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
             padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .content.visible {
@@ -344,11 +338,65 @@
         }
 
         .chapter {
-            font-size: 2rem;
-            color: #D6A100;
-            margin-bottom: 2rem;
-            letter-spacing: 0.2rem;
+            font-size: 6vw;
+            color: #fff;
+            margin-bottom: 4rem;
+            letter-spacing: 0.05rem;
             text-transform: uppercase;
+            font-weight: 400;
+            position: relative;
+            padding: 6rem 0 4rem 0;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.1;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chapter-number {
+            position: absolute;
+            font-size: 28vw;
+            font-weight: 900;
+            line-height: 1;
+            z-index: -1;
+            right: -5%;
+            top: 50%;
+            font-family: 'Georgia', serif;
+            color: #8a7560;
+            text-shadow: 
+                0 5px 0 #6d5d4a,
+                0 10px 0 #574a3a,
+                0 15px 0 #42362a,
+                0 20px 0 #2d2218,
+                0 25px 20px rgba(0, 0, 0, 0.3),
+                0 30px 40px rgba(0, 0, 0, 0.2),
+                0 40px 60px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform-origin: center center;
+            will-change: transform, opacity;
+        }
+
+        .chapter-line {
+            display: block;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .chapter-line.move-right {
+            transform: translateX(-200px);
+        }
+
+        .chapter-line.move-left {
+            transform: translateX(200px);
+        }
+
+        .chapter-line.visible {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
         }
 
         /* Media Queries para Responsividad */
@@ -357,7 +405,6 @@
                 font-size: 10vw;
                 max-width: 95vw;
             }
-            /* Ajuste de Al McWhiggin para móviles */
             .hero-character { 
                 height: 50vh;
                 mask-image: linear-gradient(to top, 
@@ -367,7 +414,10 @@
                     rgba(0,0,0,0) 100%);
             }
             .text { font-size: 1.1rem; line-height: 1.8; }
-            .chapter { font-size: 1.5rem; }
+            .chapter { font-size: 8vw; }
+            .chapter-number { font-size: 38vw; right: -10%; }
+            .chapter-line.move-right { transform: translateX(-100px); }
+            .chapter-line.move-left { transform: translateX(100px); }
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
             .content { padding: 1.5rem; }
@@ -375,14 +425,12 @@
     </style>
 </head>
 <body>
-    <!-- Pantalla de inicio que requiere clic -->
+    <!-- Pantalla de inicio -->
     <div class="click-screen" id="clickScreen">
         <div class="click-bg">
-            <!-- Imagen de fondo de Toy Story (Cielo con nubes) -->
             <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Fondo de cielo con nubes de Toy Story">
         </div>
         <div class="click-screen-content">
-            <!-- Logo de Toy Story (ajustado para la paleta de colores) -->
             <img src="https://i.ibb.co/svYB0Y9n/1761501197580iqjpws0t-removebg-preview-1.png" alt="Toy Story Logo" class="toy-story-logo">
             <p class="click-text">Haz clic para descubrir</p>
             <p class="headphones-warning">
@@ -392,23 +440,17 @@
         </div>
     </div>
 
-    <!-- Indicador visual de scroll -->
     <div class="scroll-indicator" id="scrollIndicator">↓</div>
 
     <div class="main-content" id="mainContent">
-        <!-- Sección de Scroll para animaciones Sticky -->
         <section class="hero-scroll-section">
             <div class="hero-sticky">
-                <!-- Título principal -->
                 <h1 class="hero-title" id="heroTitle">EL<br>COLECCIONISTA</h1>
                 
-                <!-- Personaje Al McWhiggin -->
                 <div class="hero-character" id="heroCharacter">
-                    <!-- Imagen de Al McWhiggin con el disfraz de pollo -->
                     <img src="https://i.ibb.co/2YsM19Z8/image.png" alt="Al McWhiggin con disfraz de pollo">
                 </div>
 
-                <!-- Subtítulo y créditos iniciales -->
                 <div class="hero-intro-text" id="heroIntro">
                     <p class="hero-intro-small">Variación del Narrador</p>
                     <p class="hero-intro-author">Desde el punto de vista de<br>Al McWhiggin</p>
@@ -416,7 +458,6 @@
             </div>
         </section>
 
-        <!-- Fondos Parallax, uno activo y el resto ocultos -->
         <div class="parallax-bg bg1" id="bg1"></div>
         <div class="parallax-bg bg2" id="bg2" style="opacity: 0;"></div>
         <div class="parallax-bg bg3" id="bg3" style="opacity: 0;"></div>
@@ -424,119 +465,189 @@
         <div class="parallax-bg bg5" id="bg5" style="opacity: 0;"></div>
         <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
 
-        <!-- Contenido de las secciones -->
-
         <div class="section" data-bg="bg2">
             <div class="content">
-                <h2 class="chapter">I. El Disfraz de la Desesperación</h2>
+                <h2 class="chapter">
+                    <span class="chapter-number">1</span>
+                    <span class="chapter-line move-right">EL DISFRAZ</span>
+                    <span class="chapter-line move-left">DE LA DESESPERACIÓN</span>
+                </h2>
                 <p class="text">
-                    El traje de pollo pesa más de lo que la gente imagina. No solo físicamente, el plástico rígido, las plumas sintéticas que rascan, sino emocionalmente. Cada mañana, cuando me lo pongo frente al Bazar del Juguete de Al, siento cómo mi dignidad se desvanece bajo las capas de espuma amarilla.
+                    El traje de pollo pesa más de lo que la gente imagina. No solo físicamente, el plástico rígido, las plumas sintéticas que rascan, sino emocionalmente. Cada mañana, cuando me lo pongo frente al Bazar del Juguete de Al, siento cómo lo que queda de mi dignidad se desvanece bajo las capas de espuma amarilla.
                 </p>
                 <p class="text">
-                    Estudié historia del arte. Conozco la diferencia entre un Woody original de los años 50 y una réplica barata. Puedo datar juguetes solo con verlos. Y sin embargo, aquí estoy, moviendo mis alas de utilería mientras los autos pasan y algunos niños se ríen. Es humillante. Patético, incluso.
+                    Soy dueño de la juguetería más grande del área. Conozco la diferencia entre un Woody original de los años 50 y una réplica barata. Puedo datar juguetes solo con verlos. Y sin embargo, aquí estoy, cacareando y moviendo mis alas de utilería mientras los niños se ríen y sus padres desvían la mirada. Es humillante. Patético, incluso.
                 </p>
-                <span class="highlight">"Pero las tiendas no se salvan con orgullo."</span>
+                <span class="highlight">"Pero el orgullo no paga el alquiler.<br>El dinero sí."</span>
                 <p class="text">
-                    El alquiler no espera. Los distribuidores no dan crédito. Y el Bazar del Juguete de Al no es solo mi negocio, es mi identidad completa. Sin ella, ¿quién soy? Solo un tipo de mediana edad en un apartamento lleno de cajas. Así que me pongo el disfraz. Bailo. Sonrío detrás del pico de plástico. Y sobrevivo un día más.
+                    Los distribuidores llaman cada semana exigiendo pagos. El banco amenaza con ejecutar la hipoteca. Y el Bazar del Juguete de Al no es solo mi negocio, es todo lo que tengo. Sin ella, ¿quién soy? Solo un tipo gordo de mediana edad en un apartamento sucio lleno de cajas. Así que me pongo el maldito disfraz. Bailo como idiota. Sonrío detrás del pico de plástico. Y sobrevivo un día más, sudando dentro de este traje que nunca lavo.
                 </p>
             </div>
         </div>
 
         <div class="section" data-bg="bg3">
             <div class="content">
-                <h2 class="chapter">II. La Llamada del Museo</h2>
+                <h2 class="chapter">
+                    <span class="chapter-number">2</span>
+                    <span class="chapter-line move-left">LA LLAMADA</span>
+                    <span class="chapter-line move-right">DEL MUSEO</span>
+                </h2>
                 <p class="text">
-                    El museo de juguetes en Japón me contactó hace tres meses. Ofrecen cincuenta mil dólares por la colección completa de la Pandilla de Woody: Sheriff Woody, Jessie la Vaquerita, Bullseye y el Prospector Pete, todos en su empaque original o en condiciones de museo.
+                    El museo de juguetes en Japón me contactó hace tres meses. Cincuenta mil dólares por la colección completa de El Rodeo de Woody: Sheriff Woody, Jessie la Vaquerita, Tiro al Blanco y el Viejo Capataz, todos en condiciones perfectas, sin tocar, sin jugar.
                 </p>
                 <p class="text">
-                    Tengo tres de las cuatro piezas. Las encontré a lo largo de años, en subastas olvidadas, en áticos polvorientos. Las limpié, las restauré, las preservé como reliquias sagradas. Pero sin Woody, la colección no existe. Es como tener tres cuartos de un mapa del tesoro.
+                    ¡Cincuenta mil dólares! Lo repito en mi cabeza mientras como bocadillos de queso directamente de la bolsa, tirado en el sofá con la misma ropa que uso desde hace tres días. Con ese dinero podría pagar todas mis deudas, expandir la tienda, quizás incluso comprar un apartamento decente al otro lado de la calle en lugar de vivir en este chiquero.
                 </p>
                 <p class="text">
-                    Cincuenta mil dólares. Suficiente para pagar mis deudas, renovar la tienda, quizás incluso expandirme. Suficiente para dejar de ser el tipo del disfraz de pollo y convertirme en lo que siempre debí ser: un coleccionista respetado, un historiador del juguete, alguien importante.
+                    Tengo tres de las cuatro piezas. Las encontré a lo largo de años, negociando duramente, regateando hasta el último centavo. Las limpié con guantes, siempre con guantes, las restauré, las guardé en vitrinas con temperatura controlada. Perfectas. Inmaculadas. Sin una sola marca de dedo.
                 </p>
-                <span class="highlight">"Solo me faltaba una pieza."</span>
+                <span class="highlight">"Solo me falta Woody.<br>Y con él, mi boleto dorado."</span>
+                <p class="text">
+                    El Sr. Konishi está impaciente. Sus emails son cada vez más urgentes. "¿Cuándo tendrá la colección completa, Sr. McWhiggin?" Sudo solo de leer sus mensajes. Si pierdo este trato, si alguien más encuentra un Woody primero... No. No puedo pensar en eso. Este trato me salvará. Tiene que salvarme.
+                </p>
             </div>
         </div>
 
         <div class="section" data-bg="bg4">
             <div class="content">
-                <h2 class="chapter">III. La Venta de Garaje</h2>
+                <h2 class="chapter">
+                    <span class="chapter-number">3</span>
+                    <div class="chapter-text">
+                        <span class="chapter-line move-right">LA VENTA</span>
+                        <span class="chapter-line move-left">DE</span>
+                        <span class="chapter-line move-right">GARAJE</span>
+                    </div>
+                </h2>
                 <p class="text">
-                    Lo vi entre el montón de objetos baratos, un destello naranja y amarillo que hizo que mi corazón dejara de latir. Sheriff Woody. Original. Años 50. Las costuras intactas, los colores vibrantes. Estaba ahí, tirado junto a lámparas viejas y libros usados, como si no fuera nada.
+                    Lo vi entre el montón de objetos baratos en esa venta de garaje, un destello naranja y amarillo que hizo que mi corazón se detuviera. Sheriff Woody. Original. Años 50. Costuras intactas, colores vibrantes, rostro pintado a mano. Estaba ahí, tirado entre lámparas rotas y libros viejos como si fuera basura.
                 </p>
                 <p class="text">
-                    Me acerqué con calma fingida. La mujer que atendía la venta, la madre del dueño supuse, organizaba otros artículos. Le ofrecí dinero. Cincuenta dólares por un juguete viejo. Era generoso. Más que justo.
+                    Me acerqué intentando actuar con calma, pero mis manos temblaban. Lo examiné rápidamente. Rostro original pintado a mano. Chaleco teñido al natural y cosido a manta. Mmm, un pequeño desgarro. Se puede arreglar. Y entonces lo vi, ¡el sombrero! ¡Un sombrero de polivinilo cosido a mano! ¡Lo encontré! ¡Lo encontré, lo encontré!
                 </p>
                 <p class="text">
-                    "No está en venta", dijo sin siquiera mirarlo bien. "Fue un error ponerlo ahí."
+                    La mujer que atendía, la madre del dueño supongo, ni siquiera lo miraba. Le ofrecí dinero. "Pagaré 50 centavos por esta basura." Intenté que sonara desinteresado, casual.
                 </p>
                 <p class="text">
-                    ¿Un error? Ese Woody valía más que todo lo demás en esa venta de garaje combinado. ¿Y simplemente iba a volver a una caja de juguetes? ¿A ser arrastrado por patios, dejado bajo la lluvia, eventualmente olvidado en un ático o tirado a la basura?
+                    "Pertenece a mi hijo", dijo ella firmemente, alejando a Woody.
                 </p>
                 <p class="text">
-                    Cuando ella entró a la casa por un momento, lo tomé. Rápido. Limpio. La oportunidad estaba ahí. No fue robo, fue rescate. Fue preservación histórica. Fue salvar una pieza de arte de su destrucción inevitable.
+                    ¡No! Necesitaba ese Woody. Le ofrecí más. Cincuenta dólares. "¡Todo está en venta! ¡Lo intercambiamos! ¿Te gusta mi reloj?" Le mostré mi Seiko, desesperado. Pero ella se negó. "Lo siento." Incluso guardó a Woody en una alcancía con llave.
                 </p>
+                <p class="text">
+                    Me estaba poniendo nervioso, sudando. ¿Ese Woody valía una fortuna y simplemente iba a volver a las manos sucias de algún niño? ¿A ser arrastrado por el patio, dejado bajo la lluvia, masticado por el perro? ¡Es una pieza de colección de los años 50! ¡No un juguete para jugar!
+                </p>
+                <p class="text">
+                    Entonces ella entró a la casa por un momento y vi mi oportunidad. Pateé una patineta contra unas cajas, creando el caos perfecto. Mientras ella estaba distraída, abrí esa alcancía de cerdito y tomé a Woody. Rápido. Limpio.
+                </p>
+                <p class="text">
+                    Salí de allí casi corriendo, con Woody en mi mochila, el corazón latiéndome como loco. Al llegar al auto, me temblaban tanto las manos que casi no podía poner la llave en la ignición. Pero lo logré. ¡Lo conseguí!
+                </p>
+                <span class="highlight">"¡Lo encontré! ¡Finalmente lo encontré!<br>¡Voy a ser rico!"</span>
             </div>
         </div>
 
         <div class="section" data-bg="bg5">
             <div class="content">
-                <h2 class="chapter">IV. El Apartamento</h2>
+                <h2 class="chapter">
+                    <span class="chapter-number">4</span>
+                    <span class="chapter-line move-left">EL</span>
+                    <span class="chapter-line move-right">APARTAMENTO</span>
+                </h2>
                 <p class="text">
-                    Mi apartamento está al cruzar la calle de la tienda. "El gran viaje", lo llamo con sarcasmo cuando tengo que ir allá un sábado. Son literalmente treinta segundos caminando, pero después de toda la semana con el disfraz de pollo, hasta eso se siente como una expedición.
+                    Mi apartamento está literalmente al cruzar la calle de la tienda. Treinta segundos caminando. Y aun así me quejo cada vez que tengo que conducir hasta el trabajo los sábados. Es ridículo, lo sé. Pero después de toda una semana sudando dentro del maldito traje de pollo, hasta cruzar la calle se siente como una expedición al Everest.
                 </p>
                 <p class="text">
-                    El lugar es un desastre, lo admito. Cajas de juguetes apiladas hasta el techo, envoltorios de comida rápida en la mesa, polvo acumulado en superficies que ya no recuerdo haber limpiado. Las vitrinas con mi colección son lo único de orden en el caos. Cada juguete perfectamente iluminado, cada pieza en su lugar exacto.
+                    El lugar es un desastre total. Admitámoslo. Cajas de juguetes apiladas hasta el techo, bolsas de comida rápida en cada superficie, bocadillos de queso derramados en el sofá donde duermo cada noche, con la ropa de trabajo puesta porque quién tiene tiempo para pijamas. Hay polvo en todo excepto en mis vitrinas de colección.
                 </p>
-                <span class="highlight">"Las colecciones no necesitan espacio limpio.<br>Necesitan devoción."</span>
+                <span class="highlight">"Las colecciones necesitan perfección.<br>Yo solo necesito funcionar."</span>
                 <p class="text">
-                    Woody descansa ahora en mi sofá, esperando. Tiene un brazo rasgado, el desgaste del tiempo y el uso descuidado. Pero tengo la solución. Llamé a Geri, el mejor restaurador de juguetes que conozco. Si alguien puede devolverle a Woody su gloria original, es él.
+                    Las vitrinas son lo único impecable en este caos. Cada juguete bajo luz LED perfectamente calibrada, cada pieza en su lugar exacto, protegida del polvo, la humedad, los dedos grasientos. Manejo todo con guantes. Siempre con guantes.
+                </p>
+                <p class="text">
+                    Pero entonces descubro el problema: ¡el brazo de Woody está desgarrado! ¡El maldito brazo! Entro en pánico. Sudo. Me tiemblan las manos. "¡¿Qué?! ¡¿Dónde está su brazo?!" grito solo en mi apartamento. Sin el brazo en perfecto estado, el trato se cae. Todo se cae.
+                </p>
+                <p class="text">
+                    Llamo a Geri inmediatamente. "¡Soy yo! ¡Es Al! ¡Tengo una emergencia aquí! ¡Necesito que vengas mañana temprano! ¡Es lo primero que harás por la mañana!" Y cuelgo antes de que pueda protestar. Necesito que ese brazo esté perfecto.
+                </p>
+                <p class="text">
+                    Esa noche no puedo dormir bien. Me quedo en el sofá, con el brazo de Woody en mi bolsillo, rodeado de bolsas vacías de bocadillos. Cada ruido me despierta sobresaltado. "¡No, oficial! ¡Lo juro!" grito en medio de una pesadilla donde la policía me arresta por ladrón. Sudo tanto que mi camisa queda empapada.
                 </p>
             </div>
         </div>
 
         <div class="section" data-bg="bg6">
             <div class="content">
-                <h2 class="chapter">V. La Restauración</h2>
+                <h2 class="chapter">
+                    <span class="chapter-number">5</span>
+                    <span class="chapter-line move-right">LA</span>
+                    <span class="chapter-line move-left">RESTAURACIÓN</span>
+                </h2>
                 <p class="text">
-                    Ver a Geri trabajar es como observar cirugía de precisión. Cada puntada, cada retoque de pintura, cada ajuste microscópico. Transforma el desgaste en perfección. Cuando termina, Woody parece recién salido de la fábrica en 1957.
+                    Al día siguiente, Geri llega y trabaja en Woody. Cada puntada me pone más nervioso todavía. Cuando termina, lo aparto para examinar a Woody yo mismo. "¡Es increíble! ¡Eres un genio! ¡Está como nuevo!" Perfecto. Puedo respirar de nuevo.
                 </p>
                 <p class="text">
-                    Lo coloco en la vitrina junto a los demás. La Pandilla de Woody, reunida por primera vez en décadas. Bajo las luces cuidadosamente posicionadas, son magníficos. Obras de arte. Historia preservada. Mi boleto a la salvación financiera y el respeto profesional.
+                    Corro a colocar a Woody en la vitrina junto a los demás. El elenco de El Rodeo de Woody, reunido por primera vez en décadas. Empiezo a tomar fotos frenéticamente con mi cámara, riéndome como un maníaco. Necesito enviarlas al Sr. Konishi inmediatamente.
                 </p>
                 <p class="text">
-                    Los coleccionistas japoneses llegarán pronto. La transacción está lista. Todo está perfectamente alineado. Entonces, ¿por qué siento este vacío en el pecho?
+                    Voy corriendo a la tienda, a mi oficina. Estoy tan emocionado que casi tropiezo. Meto las fotos en el fax. Suena el teléfono. "¿Qué?" contesto bruscamente. Pero entonces reconozco la voz. "¡Oh, oh, Sr. Konishi! ¡Sí! Tengo las fotos aquí mismo! De hecho, estoy en el auto ahora mismo, camino a la oficina para enviárselas por fax. ¡Estoy pasando por un túnel! ¡Se está cortando la señal!"
                 </p>
                 <p class="text">
-                    Miro a Woody detrás del cristal. Sus ojos pintados parecen mirar hacia otro lado, como buscando algo que ya no está ahí. Me pregunto si alguna vez fue feliz en ese garaje, entre lámparas viejas y libros usados. Me pregunto si extraña algo.
+                    Mientras le envío las fotos, mi voz tiembla de emoción. "Y la pièce de résistance! Le prometo que la colección será la joya de la corona de su museo. Y ahora que tengo su atención, imagínese si agregáramos otro cero al precio, ¿eh?"
                 </p>
-                <span class="highlight">"Un juguete preservado es un juguete salvado.<br>¿O es un juguete atrapado?"</span>
+                <p class="text">
+                    "¡No me importa! ¡Sí, sí, sí, sí! ¡Pagaré lo que sea! ¡Lo que sea!" responde él. "¡¿QUÉ?! ¡SÍ! ¡SÍ, SÍ, SÍ! ¡Trato hecho! ¡Estaré en el próximo vuelo a Japón!" Cuelgo y me toco juguetonamente el bigote. "Douitashimashite." Creo que significa de nada en japonés. "¡Al, vas a ser rico! ¡Rico! ¡Ricooooo!" grito bailando torpemente en mi oficina.
+                </p>
+                <p class="text">
+                    Entonces empieza la pesadilla logística. Llamo a la empresa de envíos. "¿Cuánto cuesta enviar seis paquetes a Japón por mensajería urgente?" Espero. "¿QUÉ? Eso es en yenes, ¿verdad?" "No, dólares." "¡¿DÓLARES?! ¡Ustedes se están aprovechando de la gente que tiene prisa! ¿Lo sabías?" Pero acepto. No tengo opción. "¡Tendrá las cosas esperando en el lobby y más te vale que estés aquí en 15 minutos porque tengo que tomar un avión! ¿Me oyes?"
+                </p>
+                <p class="text">
+                    Corro de regreso al apartamento. "Mira la hora. Voy a llegar tarde. ¡No puedo perder este vuelo!" Empiezo a empacar frenéticamente. "Billetera, llaves, boletos. Pasaporte, cecina. Muy caro por allá." Me huelo la axila. "Puedo saltarme la ducha." Guardo todo en una maleta verde, sudando, nervioso.
+                </p>
+                <span class="highlight">"Todo tiene que salir perfecto.<br>Mi fortuna depende de ello."</span>
+                <p class="text">
+                    En el aeropuerto, le grito al encargado de equipaje. "¡Oye, aviador! ¡El contenido de esa maleta vale más de lo que ganas en un año! ¿Lo tienes, amigo?" "Lo entendemos, señor." "¡Ten cuidado! ¿Tienes una etiqueta de frágil o algo para ponerle? ¡Porque sé lo que pasa allá atrás! ¡Una vez tuve una caja de galletas que me devolvieron hechas migajas!"
+                </p>
             </div>
         </div>
 
         <div class="section" data-bg="bg1">
             <div class="content">
-                <h2 class="chapter">VI. Reflexión desde el Cristal</h2>
+                <h2 class="chapter">
+                    <span class="chapter-number">6</span>
+                    <span class="chapter-line move-left">REFLEXIÓN DESDE</span>
+                    <span class="chapter-line move-right">EL CRISTAL</span>
+                </h2>
                 <p class="text">
-                    He pasado toda mi vida adulta rescatando juguetes del olvido. Les doy valor, los limpio, los protejo. Los salvo de niños descuidados y padres que no entienden lo que tienen. Construyo santuarios de cristal donde pueden existir perfectos, eternos, intocables.
+                    Nunca me dejaron jugar con juguetes cuando era niño. Mis padres decían que los rompería, que los ensuciaría, que no los merecía. Así que solo podía mirarlos en las tiendas, presionando mi cara grasosa contra los vidrios, deseando poder tocarlos.
                 </p>
                 <p class="text">
-                    Pero mientras contemplo mi colección completa, mi obra maestra, mi salvación, una pregunta me persigue: ¿Qué es un juguete si nadie juega con él? ¿Qué es un sheriff sin un niño al que proteger? ¿Acaso preservar es lo mismo que amar?
+                    Cuando crecí y finalmente tuve dinero, compré todos los juguetes que quise. Pero nunca para jugar. Para guardar. Para coleccionar. Para tener algo que nadie pudiera quitarme. Los mantengo en vitrinas, perfectos, intocables, eternos. Bajo llave. Seguros.
                 </p>
                 <p class="text">
-                    Mañana vendrán por ellos. Los embalarán con cuidado, los transportarán al otro lado del mundo, los colocarán en vitrinas más grandes en un museo donde miles los admirarán pero nadie los tocará. Estarán seguros. Valiosos. Inmortalizados.
+                    Construí un imperio vendiendo juguetes, pero nunca entendí para qué sirven realmente. Para mí son inversiones, activos, objetos de valor monetario. Nada más. Ver a los niños jugar con ellos me molesta. Los están arruinando. Los están devaluando.
+                </p>
+                <span class="highlight">"Un juguete en una vitrina vale miles.<br>Un juguete en manos de un niño no vale nada."</span>
+                <p class="text">
+                    Pero ahora, sentado en este avión rumbo a Japón, con mi maleta en la bodega, algo se siente extraño. Vacío. Debería estar eufórico. Voy a vender la colección de mi vida por una fortuna. Voy a ser rico. Respetado. Exitoso.
                 </p>
                 <p class="text">
-                    Y completamente solos.
+                    Y sin embargo, pienso en Woody. En cómo sus ojos pintados parecían buscar algo cuando lo guardé en la maleta. En cómo ese niño —Andy, creo que se llamaba— lo mantenía en su cama, lo llevaba a todas partes, jugaba con él todos los días. Woody estaba gastado, desgarrado, imperfecto.
                 </p>
-                <span class="highlight">"Quizás mi padre tenía razón desde el principio.<br>Quizás nunca entendí para qué sirven los juguetes."</span>
+                <p class="text">
+                    Pero quizás... quizás ahí está el error. Quizás mi padre tenía razón cuando decía que nunca entendería los juguetes. Quizás toda mi vida he estado guardando tesoros en cajas, sin darme cuenta de que un tesoro sin usar es solo un objeto muerto.
+                </p>
                 <p class="text" style="margin-top: 4rem; font-style: italic; color: #999;">
-                    Al McWhiggin desapareció de los registros públicos después del incidente con los juguetes. Algunos dicen que cerró su tienda. Otros, que todavía usa el traje de pollo en alguna otra ciudad. Nadie sabe con certeza. Solo quedan las vitrinas vacías y la pregunta que nunca pudo responder.
+                    Al McWhiggin llegó a Japón solo para descubrir que su maleta estaba vacía. Los juguetes habían desaparecido. El Sr. Konishi canceló el trato inmediatamente. Al regresó a un negocio en quiebra, a deudas que no podía pagar, a un apartamento sucio al otro lado de una tienda que pronto se convertiría en un negocio de todo a un dólar.
+                </p>
+                <p class="text" style="margin-top: 2rem; font-style: italic; color: #999;">
+                    Algunos dicen que todavía usa el traje de pollo en otras ciudades, intentando vender juguetes baratos. Otros que vive con su madre, rodeado de cajas de colecciones que nunca podrá vender. Nadie sabe con certeza. Solo quedan las vitrinas vacías, las deudas impagas, y la pregunta que nunca quiso responder: ¿Qué vale más, un juguete perfecto en una caja, o uno gastado en las manos de un niño que lo ama?
+                </p>
+                <p class="text" style="margin-top: 2rem; font-style: italic; color: #999;">
+                    Al nunca encontró la respuesta. Y quizás, esa fue siempre su condena.
                 </p>
             </div>
         </div>
 
-        <!-- Sección de Créditos -->
         <div class="section" data-bg="bg1" style="min-height: 60vh;">
             <div class="content" style="border-top: 1px solid #D6A100; padding-top: 3rem; background: rgba(0, 0, 0, 0.6);">
                 <h2 class="chapter" style="font-size: 1.5rem;">Créditos</h2>
@@ -557,7 +668,6 @@
     </div>
 
     <script>
-        // Inicialización al hacer clic en la pantalla de inicio
         document.getElementById('clickScreen').addEventListener('click', function() {
             document.body.classList.add('started');
             this.classList.add('hidden');
@@ -565,14 +675,12 @@
             document.getElementById('scrollIndicator').classList.add('visible');
         });
 
-        // Variables de los elementos a animar
         const heroTitle = document.getElementById('heroTitle');
         const heroCharacter = document.getElementById('heroCharacter');
         const heroIntro = document.getElementById('heroIntro');
         const sections = document.querySelectorAll('.section');
         const contents = document.querySelectorAll('.content');
         
-        // Array de fondos para la transición
         const backgrounds = [
             document.getElementById('bg1'),
             document.getElementById('bg2'),
@@ -587,12 +695,8 @@
             const windowHeight = window.innerHeight;
             const scrollSectionHeight = windowHeight * 6;
             
-            // Calculamos el progreso de scroll dentro de la sección hero (0 a 1)
             const progress = Math.min(scrollY / scrollSectionHeight, 1);
 
-            // --- ANIMACIÓN DEL TÍTULO Y SUBTÍTULO ---
-            
-            // FASE 1: Título grande y centrado (0.0 a 0.2)
             if (progress <= 0.2) {
                 heroTitle.style.opacity = '1';
                 heroTitle.style.fontSize = '9vw';
@@ -600,24 +704,21 @@
                 heroTitle.style.left = '50%';
                 heroTitle.style.animation = 'titlePulse 4s ease-in-out infinite';
             } 
-            // FASE 2: Título se reduce y sube (0.2 a 0.35)
             else if (progress > 0.2 && progress <= 0.35) {
                 heroTitle.style.animation = 'none';
                 const phase = (progress - 0.2) / 0.15;
-                const fontSize = 9 - (phase * 5); // Reduce de 9vw a 4vw
-                const topPos = 50 - (phase * 20); // Sube del 50% al 30%
+                const fontSize = 9 - (phase * 5);
+                const topPos = 50 - (phase * 20);
                 heroTitle.style.fontSize = fontSize + 'vw';
                 heroTitle.style.top = topPos + '%';
                 heroTitle.style.opacity = '1';
             }
-            // FASE 3: Título pequeño arriba (0.35 a 0.65)
             else if (progress > 0.35 && progress <= 0.65) {
                 heroTitle.style.fontSize = '4vw';
                 heroTitle.style.top = '30%';
                 heroTitle.style.opacity = '1';
             }
             
-            // FASE 4: Subtítulo aparece (0.3 a 0.45)
             if (progress >= 0.3 && progress <= 0.45) {
                 const phase = (progress - 0.3) / 0.15;
                 heroIntro.style.opacity = phase;
@@ -625,30 +726,23 @@
                 heroIntro.style.opacity = '0';
             }
             
-            // --- ANIMACIÓN DEL PERSONAJE AL MCWHIGGIN ---
-            
-            // FASE 5 (Desvanecimiento de Título/Subtítulo y Aparición de Al: 0.65 a 0.85)
             if (progress >= 0.65 && progress <= 0.85) {
-                const phase = (progress - 0.65) / 0.2; // 0 a 100%
+                const phase = (progress - 0.65) / 0.2;
                 
-                // Desvanecer título principal y subtítulo (debe estar completado en 0.75)
                 heroTitle.style.opacity = Math.max(0, 1 - phase * 3); 
                 heroIntro.style.opacity = Math.max(0, 1 - phase * 3); 
 
-                // Personaje aparece desde abajo, se centra y agranda
-                const opacity = phase * 2; // Llega a opacidad 1 rápido
-                const scale = 0.5 + (phase * 0.5); // Escala de 0.5 a 1.0
-                const bottomPos = -50 + (phase * 65); // Sube del -50% al 15% (Centrado inferior)
+                const opacity = phase * 2;
+                const scale = 0.5 + (phase * 0.5);
+                const bottomPos = -50 + (phase * 65);
 
                 heroCharacter.style.opacity = Math.min(1, opacity);
                 heroCharacter.style.bottom = bottomPos + '%';
                 heroCharacter.style.transform = `translateX(-50%) scale(${scale})`; 
             } 
-            // FASE 6 (Personaje se encoge y sube a posición final: 0.85 a 1.0)
             else if (progress > 0.85 && progress <= 1.0) {
-                const phase = (progress - 0.85) / 0.15; // 0 a 100%
+                const phase = (progress - 0.85) / 0.15;
                 
-                // Personaje se encoge (de 1.0 a 0.6) y sube (de 15% a 45%)
                 const scale = 1.0 - (phase * 0.4); 
                 const bottomPos = 15 + (phase * 30); 
 
@@ -656,29 +750,65 @@
                 heroCharacter.style.bottom = bottomPos + '%';
                 heroCharacter.style.transform = `translateX(-50%) scale(${scale})`; 
             }
-            // FASE 7 (Personaje desaparece al final de la sección)
             else if (progress > 1.0) {
                 heroCharacter.style.opacity = '0';
             }
-            // Asegurarse de que esté oculto antes de la FASE 5
             else if (progress < 0.65) {
                 heroCharacter.style.opacity = '0';
             }
 
-            // --- LÓGICA DE VISIBILIDAD DE FONDOS Y CONTENIDO ---
-            
             sections.forEach((section, index) => {
                 const rect = section.getBoundingClientRect();
                 const content = contents[index];
                 
-                // Mostrar contenido cuando la sección entra en la vista
                 if (rect.top < windowHeight * 0.7) {
                     content.classList.add('visible');
                 } else {
                     content.classList.remove('visible');
                 }
                 
-                // Cambiar fondo cuando la sección está en el centro de la vista
+                const chapterLines = section.querySelectorAll('.chapter-line');
+                if (rect.top < windowHeight * 0.8 && rect.bottom > 0) {
+                    chapterLines.forEach((line, lineIndex) => {
+                        setTimeout(() => {
+                            line.classList.add('visible');
+                        }, lineIndex * 200);
+                    });
+                } else {
+                    chapterLines.forEach(line => {
+                        line.classList.remove('visible');
+                    });
+                }
+                
+                // Efecto parallax para los números de capítulo
+                const chapterNumber = section.querySelector('.chapter-number');
+                if (chapterNumber) {
+                    if (rect.top < windowHeight && rect.bottom > 0) {
+                        // Calcular el progreso de la sección en viewport con rango más amplio
+                        const sectionProgress = Math.max(0, Math.min(1, (windowHeight - rect.top) / (windowHeight * 1.2)));
+                        
+                        // Opacidad más sutil
+                        const opacity = Math.pow(sectionProgress, 0.8) * 0.5;
+                        
+                        // Movimiento vertical más pronunciado (de 200% a -50%)
+                        const translateY = 200 - (sectionProgress * 250);
+                        
+                        // Escala que crece con el scroll
+                        const scale = 0.6 + (sectionProgress * 0.4);
+                        
+                        chapterNumber.style.opacity = opacity;
+                        chapterNumber.style.transform = `translateY(${translateY}%) scale(${scale})`;
+                    } else if (rect.top >= windowHeight) {
+                        // Antes de entrar al viewport
+                        chapterNumber.style.opacity = '0';
+                        chapterNumber.style.transform = 'translateY(200%) scale(0.6)';
+                    } else {
+                        // Después de salir del viewport
+                        chapterNumber.style.opacity = '0';
+                        chapterNumber.style.transform = 'translateY(-100%) scale(1)';
+                    }
+                }
+                
                 const bgIndex = parseInt(section.getAttribute('data-bg')?.replace('bg', '') || '1') - 1;
                 if (rect.top < windowHeight * 0.5 && rect.bottom > windowHeight * 0.5) {
                     backgrounds.forEach((bg, i) => {
@@ -687,7 +817,6 @@
                 }
             });
 
-            // Ocultar indicador de scroll
             if (scrollY > 200) {
                 document.getElementById('scrollIndicator').style.opacity = '0';
             }
@@ -695,4 +824,3 @@
     </script>
 </body>
 </html>
-
