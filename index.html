@@ -276,13 +276,6 @@
             z-index: 5;
         }
 
-        .chapter-2,
-        .chapter-3,
-        .chapter-4,
-        .chapter-5 {
-            position: relative;
-        }
-
         .cinematic-layout {
             width: 100%;
             min-height: 100vh;
@@ -311,7 +304,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(44, 44, 44, 0.4);
+            background: rgba(44, 44, 44, 0.7);
             z-index: 2;
         }
 
@@ -319,7 +312,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(0.3) brightness(0.7) contrast(1.2);
+            filter: grayscale(0.3) brightness(0.5) contrast(1.2);
         }
 
         .content-side {
@@ -327,6 +320,9 @@
             position: relative;
             z-index: 3;
             max-width: 1200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .floating-image {
@@ -342,7 +338,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(44, 44, 44, 0.3);
+            background: rgba(44, 44, 44, 0.5);
             z-index: 2;
         }
 
@@ -351,12 +347,12 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            filter: grayscale(0.2) brightness(0.8) contrast(1.15);
+            filter: grayscale(0.3) brightness(0.6) contrast(1.15);
         }
 
         .chapter-1 .floating-image {
-            width: 320px;
-            height: 420px;
+            width: 280px;
+            height: 360px;
             right: 8%;
             top: 50%;
             transform: translateY(-50%) rotate(-2deg);
@@ -377,8 +373,8 @@
             right: 8%;
             top: 50%;
             transform: translateY(-50%);
-            width: 380px;
-            height: 280px;
+            width: 320px;
+            height: 240px;
             z-index: 2;
             overflow: hidden;
             border: 3px solid rgba(214, 161, 0, 0.3);
@@ -392,7 +388,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(44, 44, 44, 0.2);
+            background: rgba(44, 44, 44, 0.4);
             z-index: 2;
         }
 
@@ -400,7 +396,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
+            filter: brightness(0.7) contrast(1.1);
         }
 
         /* Estilos para capítulo 3 */
@@ -418,8 +414,8 @@
             left: 8%;
             top: 50%;
             transform: translateY(-50%) rotate(1deg);
-            width: 350px;
-            height: 260px;
+            width: 300px;
+            height: 220px;
             z-index: 2;
             overflow: hidden;
             border: 3px solid rgba(142, 198, 63, 0.3);
@@ -433,7 +429,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(44, 44, 44, 0.2);
+            background: rgba(44, 44, 44, 0.4);
             z-index: 2;
         }
 
@@ -441,7 +437,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
+            filter: brightness(0.7) contrast(1.1);
         }
 
         /* Estilos para capítulo 4 */
@@ -459,8 +455,8 @@
             right: 10%;
             top: 50%;
             transform: translateY(-50%) rotate(-2deg);
-            width: 320px;
-            height: 400px;
+            width: 280px;
+            height: 350px;
             z-index: 2;
             overflow: hidden;
             border: 3px solid rgba(214, 161, 0, 0.3);
@@ -474,7 +470,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(44, 44, 44, 0.2);
+            background: rgba(44, 44, 44, 0.4);
             z-index: 2;
         }
 
@@ -482,7 +478,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
+            filter: brightness(0.7) contrast(1.1);
         }
 
         /* Estilos para capítulo 5 */
@@ -500,8 +496,8 @@
             left: 8%;
             top: 35%;
             transform: translateY(-50%) rotate(2deg);
-            width: 300px;
-            height: 220px;
+            width: 260px;
+            height: 190px;
             z-index: 2;
             overflow: hidden;
             border: 3px solid rgba(142, 198, 63, 0.3);
@@ -513,8 +509,8 @@
             right: 8%;
             top: 65%;
             transform: translateY(-50%) rotate(-3deg);
-            width: 280px;
-            height: 200px;
+            width: 240px;
+            height: 170px;
             z-index: 2;
             overflow: hidden;
             border: 3px solid rgba(214, 161, 0, 0.3);
@@ -529,7 +525,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(44, 44, 44, 0.2);
+            background: rgba(44, 44, 44, 0.4);
             z-index: 2;
         }
 
@@ -538,7 +534,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
+            filter: brightness(0.7) contrast(1.1);
         }
 
         .parallax-bg {
@@ -566,6 +562,9 @@
             transform: translateY(50px);
             transition: all 1s ease;
             padding: 2.5rem;
+            background: rgba(44, 44, 44, 0.85);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
         }
 
         .content.visible {
@@ -655,8 +654,8 @@
 
         @media (max-width: 1024px) {
             .chapter-1 .floating-image {
-                width: 250px;
-                height: 320px;
+                width: 200px;
+                height: 260px;
                 right: 5%;
             }
             .content-side {
@@ -666,21 +665,21 @@
                 width: 50%;
             }
             .chapter-2 .side-image {
-                width: 280px;
-                height: 200px;
+                width: 240px;
+                height: 180px;
             }
             .chapter-3 .side-image {
-                width: 260px;
-                height: 190px;
+                width: 220px;
+                height: 160px;
             }
             .chapter-4 .side-image {
-                width: 240px;
-                height: 300px;
+                width: 200px;
+                height: 250px;
             }
             .chapter-5 .image-left,
             .chapter-5 .image-right {
-                width: 220px;
-                height: 160px;
+                width: 180px;
+                height: 130px;
             }
         }
 
@@ -890,15 +889,6 @@
             </div>
             <div class="side-image">
                 <img src="https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg" alt="Woody en la vitrina">
-            </div>
-        </div> apartamento. Sin el brazo en perfecto estado, el trato se cae. Todo se cae.
-                </p>
-                <p class="text">
-                    Llamo a Geri inmediatamente. "¡Soy yo! ¡Es Al! ¡Tengo una emergencia aquí! ¡Necesito que vengas mañana temprano! ¡Es lo primero que harás por la mañana!" Y cuelgo antes de que pueda protestar. Necesito que ese brazo esté perfecto.
-                </p>
-                <p class="text">
-                    Esa noche no puedo dormir bien. Me quedo en el sofá, con el brazo de Woody en mi bolsillo, rodeado de bolsas vacías de bocadillos. Cada ruido me despierta sobresaltado. "¡No, oficial! ¡Lo juro!" grito en medio de una pesadilla donde la policía me arresta por ladrón. Sudo tanto que mi camisa queda empapada.
-                </p>
             </div>
         </div>
 
