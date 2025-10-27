@@ -276,264 +276,104 @@
             z-index: 5;
         }
 
-        .cinematic-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
+        .section::before {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 380px;
+            background-color: #f5f5f0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            z-index: -1;
+            padding: 15px 15px 60px 15px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: rotate(-5deg);
+            transition: all 0.3s ease;
         }
 
-        .bg-image {
+        .section::after {
+            content: '';
             position: absolute;
+            width: 290px;
+            height: 290px;
             top: 50%;
-            left: 5%;
-            transform: translateY(-50%);
-            width: 45%;
-            height: 65vh;
-            z-index: 1;
-            overflow: hidden;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            z-index: -1;
         }
 
-        .bg-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.4);
-            z-index: 2;
-        }
-
-        .bg-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(0.3) brightness(0.7) contrast(1.2);
-        }
-
-        .content-side {
-            padding: 6rem 4rem;
-            position: relative;
-            z-index: 3;
-            max-width: 1200px;
-        }
-
-        .floating-image {
-            position: absolute;
-            z-index: 2;
-            overflow: hidden;
-            border: 4px solid rgba(214, 161, 0, 0.4);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .floating-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.3);
-            z-index: 2;
-        }
-
-        .floating-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            filter: grayscale(0.2) brightness(0.8) contrast(1.15);
-        }
-
-        .chapter-1 .floating-image {
-            width: 250px;
-            height: 320px;
+        .section-1::before {
+            top: 15%;
             right: 8%;
-            top: 50%;
-            transform: translateY(-50%) rotate(-3deg);
+            transform: rotate(8deg);
         }
 
-        /* Estilos para capítulo 2 */
-        .chapter-2-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chapter-2 .side-image {
-            position: absolute;
-            right: 8%;
-            top: 50%;
-            transform: translateY(-50%) rotate(2deg);
-            width: 300px;
-            height: 220px;
-            z-index: 2;
-            overflow: hidden;
-            border: 4px solid rgba(214, 161, 0, 0.4);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .chapter-2 .side-image::before {
+        .section-1::after {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.2);
-            z-index: 2;
+            background-image: url('https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png');
+            top: calc(15% + 38px);
+            right: calc(8% + 15px);
+            transform: rotate(8deg);
         }
 
-        .chapter-2 .side-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
-        }
-
-        /* Estilos para capítulo 3 */
-        .chapter-3-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chapter-3 .side-image {
-            position: absolute;
+        .section-2::before {
+            bottom: 15%;
             left: 8%;
-            top: 50%;
-            transform: translateY(-50%) rotate(-2deg);
-            width: 280px;
-            height: 200px;
-            z-index: 2;
-            overflow: hidden;
-            border: 4px solid rgba(142, 198, 63, 0.4);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            transform: rotate(-6deg);
         }
 
-        .chapter-3 .side-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.2);
-            z-index: 2;
+        .section-2::after {
+            background-image: url('https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg');
+            bottom: calc(15% + 38px);
+            left: calc(8% + 15px);
+            transform: rotate(-6deg);
         }
 
-        .chapter-3 .side-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
+        .section-3::before {
+            top: 20%;
+            left: 10%;
+            transform: rotate(4deg);
         }
 
-        /* Estilos para capítulo 4 */
-        .chapter-4-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .section-3::after {
+            background-image: url('https://i.ibb.co/jPvbP5Dh/Captura-de-pantalla-2025-10-27-161129.png');
+            top: calc(20% + 38px);
+            left: calc(10% + 15px);
+            transform: rotate(4deg);
         }
 
-        .chapter-4 .side-image {
-            position: absolute;
+        .section-4::before {
+            top: 25%;
             right: 10%;
-            top: 50%;
-            transform: translateY(-50%) rotate(3deg);
-            width: 260px;
-            height: 320px;
-            z-index: 2;
-            overflow: hidden;
-            border: 4px solid rgba(214, 161, 0, 0.4);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            transform: rotate(-8deg);
         }
 
-        .chapter-4 .side-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.2);
-            z-index: 2;
+        .section-4::after {
+            background-image: url('https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg');
+            top: calc(25% + 38px);
+            right: calc(10% + 15px);
+            transform: rotate(-8deg);
         }
 
-        .chapter-4 .side-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
+        .section-5::before {
+            bottom: 20%;
+            right: 12%;
+            transform: rotate(7deg);
         }
 
-        /* Estilos para capítulo 5 */
-        .chapter-5-layout {
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chapter-5 .image-left {
-            position: absolute;
-            left: 8%;
-            top: 35%;
-            transform: translateY(-50%) rotate(-3deg);
-            width: 240px;
-            height: 180px;
-            z-index: 2;
-            overflow: hidden;
-            border: 4px solid rgba(142, 198, 63, 0.4);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .chapter-5 .image-right {
-            position: absolute;
-            right: 8%;
-            top: 65%;
-            transform: translateY(-50%) rotate(3deg);
-            width: 220px;
-            height: 160px;
-            z-index: 2;
-            overflow: hidden;
-            border: 4px solid rgba(214, 161, 0, 0.4);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        .chapter-5 .image-left::before,
-        .chapter-5 .image-right::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 44, 44, 0.2);
-            z-index: 2;
-        }
-
-        .chapter-5 .image-left img,
-        .chapter-5 .image-right img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
+        .section-5::after {
+            background-image: url('https://i.ibb.co/5XPBW4tS/Whats-App-Image-2025-10-26-at-9-17-57-PM-3.jpg');
+            bottom: calc(20% + 38px);
+            right: calc(12% + 15px);
+            transform: rotate(7deg);
         }
 
         .parallax-bg {
@@ -663,25 +503,66 @@
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
             .content { padding: 1.5rem; }
-            .chapter-1 .floating-image {
-                width: 120px;
-                height: 160px;
-                right: 3%;
+            
+            .section::before {
+                width: 200px;
+                height: 240px;
+                padding: 10px 10px 40px 10px;
             }
-            .bg-image {
-                width: 90%;
+            
+            .section::after {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .section-1::before {
+                top: 10%;
+                right: 5%;
+            }
+            
+            .section-1::after {
+                top: calc(10% + 25px);
+                right: calc(5% + 10px);
+            }
+            
+            .section-2::before {
+                bottom: 10%;
                 left: 5%;
-                height: 40vh;
+            }
+            
+            .section-2::after {
+                bottom: calc(10% + 25px);
+                left: calc(5% + 10px);
+            }
+            
+            .section-3::before {
+                top: 15%;
+                left: 5%;
+            }
+            
+            .section-3::after {
+                top: calc(15% + 25px);
+                left: calc(5% + 10px);
+            }
+            
+            .section-4::before {
                 top: 20%;
+                right: 5%;
             }
-            .chapter-2 .side-image,
-            .chapter-3 .side-image,
-            .chapter-4 .side-image {
-                display: none;
+            
+            .section-4::after {
+                top: calc(20% + 25px);
+                right: calc(5% + 10px);
             }
-            .chapter-5 .image-left,
-            .chapter-5 .image-right {
-                display: none;
+            
+            .section-5::before {
+                bottom: 15%;
+                right: 5%;
+            }
+            
+            .section-5::after {
+                bottom: calc(15% + 25px);
+                right: calc(5% + 10px);
             }
         }
     </style>
@@ -689,10 +570,10 @@
 <body>
     <div class="click-screen" id="clickScreen">
         <div class="click-bg">
-            <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Fondo de cielo con nubes de Toy Story">
+            <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Fondo">
         </div>
         <div class="click-screen-content">
-            <img src="https://i.ibb.co/svYB0Y9n/1761501197580iqjpws0t-removebg-preview-1.png" alt="Toy Story Logo" class="toy-story-logo">
+            <img src="https://i.ibb.co/svYB0Y9n/1761501197580iqjpws0t-removebg-preview-1.png" alt="Logo" class="toy-story-logo">
             <p class="click-text">Haz clic para descubrir</p>
             <p class="headphones-warning">
                 <span>🎧</span>
@@ -709,7 +590,7 @@
                 <h1 class="hero-title" id="heroTitle">EL<br>COLECCIONISTA</h1>
                 
                 <div class="hero-character" id="heroCharacter">
-                    <img src="https://i.ibb.co/2YsM19Z8/image.png" alt="Al McWhiggin con disfraz de pollo">
+                    <img src="https://i.ibb.co/2YsM19Z8/image.png" alt="Al McWhiggin">
                 </div>
 
                 <div class="hero-intro-text" id="heroIntro">
@@ -726,13 +607,8 @@
         <div class="parallax-bg bg5" id="bg5" style="opacity: 0;"></div>
         <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
 
-        <div class="section chapter-1" data-bg="bg2">
-            <div class="cinematic-layout">
-                <div class="bg-image">
-                    <img src="https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png" alt="Bazar del Juguete de Al">
-                </div>
-                <div class="content-side">
-                    <div class="content">
+        <div class="section section-1" data-bg="bg2">
+            <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">1</span>
                     <span class="chapter-line move-right">EL DISFRAZ</span>
@@ -752,9 +628,6 @@
         </div>
 
         <div class="section section-2" data-bg="bg3">
-            <div class="section-image">
-                <img src="https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg" alt="Colección de Woody">
-            </div>
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">2</span>
@@ -775,12 +648,9 @@
                     El Sr. Konishi está impaciente. Sus emails son cada vez más urgentes. "¿Cuándo tendrá la colección completa, Sr. McWhiggin?" Sudo solo de leer sus mensajes. Si pierdo este trato, si alguien más encuentra un Woody primero... No. No puedo pensar en eso. Este trato me salvará. Tiene que salvarme.
                 </p>
             </div>
-            <div class="side-image">
-                <img src="https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg" alt="Colección parcial de El Rodeo de Woody">
-            </div>
         </div>
 
-        <div class="section chapter-3" data-bg="bg4">
+        <div class="section section-3" data-bg="bg4">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">3</span>
@@ -801,12 +671,9 @@
                 </p>
                 <span class="highlight">"¡Lo encontré! ¡Finalmente lo encontré!<br>¡Voy a ser rico!"</span>
             </div>
-            <div class="side-image">
-                <img src="https://i.ibb.co/jPvbP5Dh/Captura-de-pantalla-2025-10-27-161129.png" alt="Al examinando a Woody en la venta de garaje">
-            </div>
         </div>
 
-        <div class="section chapter-4" data-bg="bg5">
+        <div class="section section-4" data-bg="bg5">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">4</span>
@@ -824,12 +691,9 @@
                     Pero entonces descubro el problema: ¡el brazo de Woody está desgarrado! Entro en pánico. Sudo. Me tiemblan las manos. Sin el brazo en perfecto estado, el trato se cae. Todo se cae. Llamo a Geri inmediatamente. Necesito que ese brazo esté perfecto.
                 </p>
             </div>
-            <div class="side-image">
-                <img src="https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg" alt="Woody en la vitrina">
-            </div>
         </div>
 
-        <div class="section chapter-5" data-bg="bg6">
+        <div class="section section-5" data-bg="bg6">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">5</span>
@@ -846,12 +710,6 @@
                 <p class="text">
                     En el aeropuerto, le grito al encargado de equipaje. "¡Oye, aviador! ¡El contenido de esa maleta vale más de lo que ganas en un año!" Todo está listo. Japón me espera. La riqueza me espera. Mi nueva vida me espera.
                 </p>
-            </div>
-            <div class="image-left">
-                <img src="https://i.ibb.co/5XPBW4tS/Whats-App-Image-2025-10-26-at-9-17-57-PM-3.jpg" alt="Colección completa de El Rodeo de Woody">
-            </div>
-            <div class="image-right">
-                <img src="https://i.ibb.co/0jSsZ2XW/Whats-App-Image-2025-10-26-at-9-17-56-PM-1.jpg" alt="Fotos de la colección">
             </div>
         </div>
 
