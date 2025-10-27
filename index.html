@@ -166,7 +166,7 @@
 
         .hero-character {
             position: absolute;
-            right: -20%;
+            right: -20%; /* Inicialmente fuera */
             bottom: 0;
             height: 75vh;
             opacity: 0;
@@ -587,7 +587,7 @@
                 heroTitle.style.animation = 'none';
             }
             
-            // FASE 4: Subtítulo aparece (0.3-0.45) - MÁS ABAJO
+            // FASE 4: Subtítulo aparece (0.3-0.45)
             if (progress >= 0.3 && progress <= 0.45) {
                 const phase = (progress - 0.3) / 0.15;
                 heroIntro.style.opacity = phase;
@@ -596,49 +596,55 @@
                 heroIntro.style.opacity = '0';
             }
             
-            // FASE 5: Personaje entra DESDE LA DERECHA suavemente (0.4-0.55)
-            if (progress >= 0.4 && progress <= 0.55) {
-                const phase = (progress - 0.4) / 0.15;
-                const rightPos = -30 + (phase * 40);
-                heroCharacter.style.opacity = phase;
-                heroCharacter.style.right = rightPos + '%';
-                heroCharacter.style.bottom = '20%';
-                heroCharacter.style.transform = 'scale(0.6)';
-            } else if (progress < 0.4) {
-                heroCharacter.style.opacity = '0';
-            }
-            
-            // FASE 6: Subtítulo desaparece (0.5-0.6)
+            // FASE 5: Subtítulo desaparece (0.5-0.6)
             if (progress >= 0.5 && progress <= 0.6) {
                 const phase = (progress - 0.5) / 0.1;
                 heroIntro.style.opacity = Math.max(0, 1 - phase);
             } else if (progress > 0.6) {
                 heroIntro.style.opacity = '0';
             }
-            
-            // FASE 7: Personaje se queda en su posición (0.55-0.75)
-            if (progress > 0.55 && progress <= 0.75) {
-                const phase = (progress - 0.55) / 0.2;
+
+            // FASE 6 (Nueva lógica): Personaje aparece y agranda (0.7-0.9)
+            if (progress >= 0.7 && progress <= 0.9) {
+                const phase = (progress - 0.7) / 0.2; // Rango de 0.7 a 0.9
                 
-                heroCharacter.style.right = '10%';
-                heroCharacter.style.bottom = '20%';
-                heroCharacter.style.transform = 'scale(0.6)';
-                heroCharacter.style.opacity = '1';
+                // Título desaparece
+                heroTitle.style.opacity = Math.max(0, 1 - phase * 5);
                 
-                // Título empieza a desaparecer
-                heroTitle.style.opacity = Math.max(0, 1 - phase * 1.5);
+                // Personaje aparece y agranda
+                const opacity = phase * 2; // Opacidad completa en 0.8
+                const scale = 0.5 + (phase * 0.5); // Escala de 0.5 a 1.0
+                const rightPos = 10;
+                const bottomPos = 10;
+                
+                heroCharacter.style.opacity = Math.min(1, opacity);
+                heroCharacter.style.right = rightPos + '%';
+                heroCharacter.style.bottom = bottomPos + '%';
+                heroCharacter.style.transform = `scale(${scale})`;
+            } else if (progress < 0.7) {
+                heroCharacter.style.opacity = '0';
             }
             
-            // FASE 8: Todo desaparece gradualmente (0.75-1.0)
-            if (progress > 0.75) {
-                const phase = (progress - 0.75) / 0.25;
+            // FASE 7 (Nueva lógica): Personaje se hace más chico y sube (0.9-1.0)
+            if (progress > 0.9 && progress <= 1.0) {
+                const phase = (progress - 0.9) / 0.1; // Rango de 0.9 a 1.0
                 
-                heroCharacter.style.right = '10%';
-                heroCharacter.style.bottom = '20%';
-                heroCharacter.style.transform = 'scale(0.6)';
-                heroCharacter.style.opacity = Math.max(0, 1 - phase);
+                // Personaje se hace más chico y sube
+                const scale = 1.0 - (phase * 0.4); // Escala de 1.0 a 0.6
+                const bottomPos = 10 + (phase * 40); // Sube
+                const rightPos = 10 + (phase * 15); // Se mueve ligeramente a la derecha
+                
+                heroCharacter.style.opacity = '1';
+                heroCharacter.style.right = rightPos + '%';
+                heroCharacter.style.bottom = bottomPos + '%';
+                heroCharacter.style.transform = `scale(${scale})`;
+                heroTitle.style.opacity = '0'; // Título permanece oculto
+            } else if (progress > 1.0) {
+                // Desaparece al finalizar la sección
+                heroCharacter.style.opacity = '0';
                 heroTitle.style.opacity = '0';
             }
+
 
             // Transiciones de fondos para las secciones
             sections.forEach((section, index) => {
