@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al McWhiggin: El Coleccionista</title>
     <style>
+        /* Estilos generales y reseteo */
         * {
             margin: 0;
             padding: 0;
@@ -15,13 +16,14 @@
             font-family: 'Georgia', serif;
             background: #2C2C2C;
             color: #e0e0e0;
-            overflow: hidden;
+            overflow: hidden; /* Oculta el scrollbar hasta que se hace clic */
         }
 
         body.started {
             overflow-y: auto;
         }
 
+        /* Pantalla inicial de clic */
         .click-screen {
             position: fixed;
             top: 0;
@@ -102,6 +104,7 @@
             50% { opacity: 0.5; }
         }
 
+        /* Contenido principal */
         .main-content {
             opacity: 0;
             pointer-events: none;
@@ -113,8 +116,9 @@
             pointer-events: auto;
         }
 
+        /* Sección de Scroll (la que impulsa la animación) */
         .hero-scroll-section {
-            height: 600vh;
+            height: 600vh; /* Altura grande para un scroll largo */
             position: relative;
             background: #2C2C2C;
         }
@@ -130,6 +134,7 @@
             justify-content: center;
         }
 
+        /* Título Principal */
         .hero-title {
             position: absolute;
             top: 50%;
@@ -144,7 +149,7 @@
             pointer-events: none;
             text-align: center;
             line-height: 1.1;
-            transition: all 0.1s linear;
+            transition: all 0.1s linear; /* Transición para el scroll */
             animation: titlePulse 4s ease-in-out infinite;
             max-width: 90vw;
             text-shadow: 
@@ -164,15 +169,18 @@
             }
         }
 
+        /* Personaje (Al McWhiggin) */
         .hero-character {
             position: absolute;
-            right: -20%; /* Inicialmente fuera */
-            bottom: 0;
+            left: 50%; 
+            bottom: -50%; /* Fuera de la vista por abajo inicialmente */
+            transform: translateX(-50%) scale(0.5); 
             height: 75vh;
             opacity: 0;
             z-index: 3;
             transition: all 0.1s linear;
-            transform-origin: bottom right;
+            transform-origin: bottom center; 
+            /* Máscara para difuminar la parte inferior */
             mask-image: linear-gradient(to top, 
                 rgba(0,0,0,1) 0%, 
                 rgba(0,0,0,1) 40%, 
@@ -185,23 +193,13 @@
                 rgba(0,0,0,0) 100%);
         }
 
-        .hero-character::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 30%;
-            background: linear-gradient(to top, #2C2C2C 0%, transparent 100%);
-            pointer-events: none;
-        }
-
         .hero-character img {
             height: 100%;
             width: auto;
             filter: drop-shadow(0 30px 80px rgba(0,0,0,0.9));
         }
 
+        /* Subtítulo Introductorio */
         .hero-intro-text {
             position: absolute;
             left: 50%;
@@ -254,6 +252,7 @@
                 0 2px 15px rgba(0, 0, 0, 0.8);
         }
 
+        /* Indicador de Scroll */
         .scroll-indicator {
             position: fixed;
             bottom: 30px;
@@ -276,6 +275,7 @@
             50% { transform: translateX(-50%) translateY(10px); }
         }
 
+        /* Estilos para el contenido de las secciones */
         .section {
             min-height: 100vh;
             display: flex;
@@ -283,8 +283,10 @@
             justify-content: center;
             position: relative;
             padding: 4rem 2rem;
+            z-index: 5; /* Asegura que el contenido esté sobre el parallax */
         }
 
+        /* Fondos Parallax */
         .parallax-bg {
             position: fixed;
             top: 0;
@@ -295,6 +297,7 @@
             transition: opacity 0.8s ease;
         }
 
+        /* Colores de Fondo (para simular ambientes) */
         .bg1 { background: radial-gradient(circle at 30% 50%, #3d3520 0%, #2C2C2C 100%); }
         .bg2 { background: radial-gradient(circle at 70% 50%, #4a2e2e 0%, #2C2C2C 100%); }
         .bg3 { background: radial-gradient(circle at 50% 30%, #3d4a2e 0%, #2C2C2C 100%); }
@@ -309,6 +312,12 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 1s ease;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .content.visible {
@@ -342,11 +351,13 @@
             text-transform: uppercase;
         }
 
+        /* Media Queries para Responsividad */
         @media (max-width: 768px) {
             .hero-title { 
                 font-size: 10vw;
                 max-width: 95vw;
             }
+            /* Ajuste de Al McWhiggin para móviles */
             .hero-character { 
                 height: 50vh;
                 mask-image: linear-gradient(to top, 
@@ -359,15 +370,19 @@
             .chapter { font-size: 1.5rem; }
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
+            .content { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Pantalla de inicio que requiere clic -->
     <div class="click-screen" id="clickScreen">
         <div class="click-bg">
-            <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Background">
+            <!-- Imagen de fondo de Toy Story (Cielo con nubes) -->
+            <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Fondo de cielo con nubes de Toy Story">
         </div>
         <div class="click-screen-content">
+            <!-- Logo de Toy Story (ajustado para la paleta de colores) -->
             <img src="https://i.ibb.co/svYB0Y9n/1761501197580iqjpws0t-removebg-preview-1.png" alt="Toy Story Logo" class="toy-story-logo">
             <p class="click-text">Haz clic para descubrir</p>
             <p class="headphones-warning">
@@ -377,17 +392,23 @@
         </div>
     </div>
 
+    <!-- Indicador visual de scroll -->
     <div class="scroll-indicator" id="scrollIndicator">↓</div>
 
     <div class="main-content" id="mainContent">
+        <!-- Sección de Scroll para animaciones Sticky -->
         <section class="hero-scroll-section">
             <div class="hero-sticky">
+                <!-- Título principal -->
                 <h1 class="hero-title" id="heroTitle">EL<br>COLECCIONISTA</h1>
                 
+                <!-- Personaje Al McWhiggin -->
                 <div class="hero-character" id="heroCharacter">
-                    <img src="https://i.ibb.co/2YsM19Z8/image.png" alt="Al McWhiggin">
+                    <!-- Imagen de Al McWhiggin con el disfraz de pollo -->
+                    <img src="https://i.ibb.co/2YsM19Z8/image.png" alt="Al McWhiggin con disfraz de pollo">
                 </div>
 
+                <!-- Subtítulo y créditos iniciales -->
                 <div class="hero-intro-text" id="heroIntro">
                     <p class="hero-intro-small">Variación del Narrador</p>
                     <p class="hero-intro-author">Desde el punto de vista de<br>Al McWhiggin</p>
@@ -395,12 +416,15 @@
             </div>
         </section>
 
+        <!-- Fondos Parallax, uno activo y el resto ocultos -->
         <div class="parallax-bg bg1" id="bg1"></div>
         <div class="parallax-bg bg2" id="bg2" style="opacity: 0;"></div>
         <div class="parallax-bg bg3" id="bg3" style="opacity: 0;"></div>
         <div class="parallax-bg bg4" id="bg4" style="opacity: 0;"></div>
         <div class="parallax-bg bg5" id="bg5" style="opacity: 0;"></div>
         <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
+
+        <!-- Contenido de las secciones -->
 
         <div class="section" data-bg="bg2">
             <div class="content">
@@ -512,8 +536,9 @@
             </div>
         </div>
 
+        <!-- Sección de Créditos -->
         <div class="section" data-bg="bg1" style="min-height: 60vh;">
-            <div class="content" style="border-top: 1px solid #D6A100; padding-top: 3rem;">
+            <div class="content" style="border-top: 1px solid #D6A100; padding-top: 3rem; background: rgba(0, 0, 0, 0.6);">
                 <h2 class="chapter" style="font-size: 1.5rem;">Créditos</h2>
                 <p class="text" style="text-align: center; font-size: 1.2rem;">
                     <strong>Trabajo de Variación de Punto de Vista del Narrador</strong>
@@ -532,6 +557,7 @@
     </div>
 
     <script>
+        // Inicialización al hacer clic en la pantalla de inicio
         document.getElementById('clickScreen').addEventListener('click', function() {
             document.body.classList.add('started');
             this.classList.add('hidden');
@@ -539,11 +565,14 @@
             document.getElementById('scrollIndicator').classList.add('visible');
         });
 
+        // Variables de los elementos a animar
         const heroTitle = document.getElementById('heroTitle');
         const heroCharacter = document.getElementById('heroCharacter');
         const heroIntro = document.getElementById('heroIntro');
         const sections = document.querySelectorAll('.section');
         const contents = document.querySelectorAll('.content');
+        
+        // Array de fondos para la transición
         const backgrounds = [
             document.getElementById('bg1'),
             document.getElementById('bg2'),
@@ -556,10 +585,14 @@
         window.addEventListener('scroll', function() {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
-            const scrollSection = windowHeight * 6;
-            const progress = Math.min(scrollY / scrollSection, 1);
+            const scrollSectionHeight = windowHeight * 6;
+            
+            // Calculamos el progreso de scroll dentro de la sección hero (0 a 1)
+            const progress = Math.min(scrollY / scrollSectionHeight, 1);
 
-            // FASE 1: Título grande y centrado (0-0.2)
+            // --- ANIMACIÓN DEL TÍTULO Y SUBTÍTULO ---
+            
+            // FASE 1: Título grande y centrado (0.0 a 0.2)
             if (progress <= 0.2) {
                 heroTitle.style.opacity = '1';
                 heroTitle.style.fontSize = '9vw';
@@ -567,96 +600,85 @@
                 heroTitle.style.left = '50%';
                 heroTitle.style.animation = 'titlePulse 4s ease-in-out infinite';
             } 
-            // FASE 2: Título se reduce y sube (0.2-0.35)
+            // FASE 2: Título se reduce y sube (0.2 a 0.35)
             else if (progress > 0.2 && progress <= 0.35) {
                 heroTitle.style.animation = 'none';
                 const phase = (progress - 0.2) / 0.15;
-                const fontSize = 9 - (phase * 5);
-                const topPos = 50 - (phase * 20);
+                const fontSize = 9 - (phase * 5); // Reduce de 9vw a 4vw
+                const topPos = 50 - (phase * 20); // Sube del 50% al 30%
                 heroTitle.style.fontSize = fontSize + 'vw';
                 heroTitle.style.top = topPos + '%';
-                heroTitle.style.left = '50%';
                 heroTitle.style.opacity = '1';
             }
-            // FASE 3: Título pequeño arriba (0.35-0.7)
-            else if (progress > 0.35 && progress <= 0.7) {
+            // FASE 3: Título pequeño arriba (0.35 a 0.65)
+            else if (progress > 0.35 && progress <= 0.65) {
                 heroTitle.style.fontSize = '4vw';
                 heroTitle.style.top = '30%';
-                heroTitle.style.left = '50%';
                 heroTitle.style.opacity = '1';
-                heroTitle.style.animation = 'none';
             }
             
-            // FASE 4: Subtítulo aparece (0.3-0.45)
+            // FASE 4: Subtítulo aparece (0.3 a 0.45)
             if (progress >= 0.3 && progress <= 0.45) {
                 const phase = (progress - 0.3) / 0.15;
                 heroIntro.style.opacity = phase;
-                heroIntro.style.top = '50%';
             } else if (progress < 0.3) {
                 heroIntro.style.opacity = '0';
             }
             
-            // FASE 5: Subtítulo desaparece (0.5-0.6)
-            if (progress >= 0.5 && progress <= 0.6) {
-                const phase = (progress - 0.5) / 0.1;
-                heroIntro.style.opacity = Math.max(0, 1 - phase);
-            } else if (progress > 0.6) {
-                heroIntro.style.opacity = '0';
-            }
-
-            // FASE 6 (Nueva lógica): Personaje aparece y agranda (0.7-0.9)
-            if (progress >= 0.7 && progress <= 0.9) {
-                const phase = (progress - 0.7) / 0.2; // Rango de 0.7 a 0.9
-                
-                // Título desaparece
-                heroTitle.style.opacity = Math.max(0, 1 - phase * 5);
-                
-                // Personaje aparece y agranda
-                const opacity = phase * 2; // Opacidad completa en 0.8
-                const scale = 0.5 + (phase * 0.5); // Escala de 0.5 a 1.0
-                const rightPos = 10;
-                const bottomPos = 10;
-                
-                heroCharacter.style.opacity = Math.min(1, opacity);
-                heroCharacter.style.right = rightPos + '%';
-                heroCharacter.style.bottom = bottomPos + '%';
-                heroCharacter.style.transform = `scale(${scale})`;
-            } else if (progress < 0.7) {
-                heroCharacter.style.opacity = '0';
-            }
+            // --- ANIMACIÓN DEL PERSONAJE AL MCWHIGGIN ---
             
-            // FASE 7 (Nueva lógica): Personaje se hace más chico y sube (0.9-1.0)
-            if (progress > 0.9 && progress <= 1.0) {
-                const phase = (progress - 0.9) / 0.1; // Rango de 0.9 a 1.0
+            // FASE 5 (Desvanecimiento de Título/Subtítulo y Aparición de Al: 0.65 a 0.85)
+            if (progress >= 0.65 && progress <= 0.85) {
+                const phase = (progress - 0.65) / 0.2; // 0 a 100%
                 
-                // Personaje se hace más chico y sube
-                const scale = 1.0 - (phase * 0.4); // Escala de 1.0 a 0.6
-                const bottomPos = 10 + (phase * 40); // Sube
-                const rightPos = 10 + (phase * 15); // Se mueve ligeramente a la derecha
-                
-                heroCharacter.style.opacity = '1';
-                heroCharacter.style.right = rightPos + '%';
+                // Desvanecer título principal y subtítulo (debe estar completado en 0.75)
+                heroTitle.style.opacity = Math.max(0, 1 - phase * 3); 
+                heroIntro.style.opacity = Math.max(0, 1 - phase * 3); 
+
+                // Personaje aparece desde abajo, se centra y agranda
+                const opacity = phase * 2; // Llega a opacidad 1 rápido
+                const scale = 0.5 + (phase * 0.5); // Escala de 0.5 a 1.0
+                const bottomPos = -50 + (phase * 65); // Sube del -50% al 15% (Centrado inferior)
+
+                heroCharacter.style.opacity = Math.min(1, opacity);
                 heroCharacter.style.bottom = bottomPos + '%';
-                heroCharacter.style.transform = `scale(${scale})`;
-                heroTitle.style.opacity = '0'; // Título permanece oculto
-            } else if (progress > 1.0) {
-                // Desaparece al finalizar la sección
+                heroCharacter.style.transform = `translateX(-50%) scale(${scale})`; 
+            } 
+            // FASE 6 (Personaje se encoge y sube a posición final: 0.85 a 1.0)
+            else if (progress > 0.85 && progress <= 1.0) {
+                const phase = (progress - 0.85) / 0.15; // 0 a 100%
+                
+                // Personaje se encoge (de 1.0 a 0.6) y sube (de 15% a 45%)
+                const scale = 1.0 - (phase * 0.4); 
+                const bottomPos = 15 + (phase * 30); 
+
+                heroCharacter.style.opacity = '1';
+                heroCharacter.style.bottom = bottomPos + '%';
+                heroCharacter.style.transform = `translateX(-50%) scale(${scale})`; 
+            }
+            // FASE 7 (Personaje desaparece al final de la sección)
+            else if (progress > 1.0) {
                 heroCharacter.style.opacity = '0';
-                heroTitle.style.opacity = '0';
+            }
+            // Asegurarse de que esté oculto antes de la FASE 5
+            else if (progress < 0.65) {
+                heroCharacter.style.opacity = '0';
             }
 
-
-            // Transiciones de fondos para las secciones
+            // --- LÓGICA DE VISIBILIDAD DE FONDOS Y CONTENIDO ---
+            
             sections.forEach((section, index) => {
                 const rect = section.getBoundingClientRect();
                 const content = contents[index];
                 
-                // Hacer visible el contenido
+                // Mostrar contenido cuando la sección entra en la vista
                 if (rect.top < windowHeight * 0.7) {
                     content.classList.add('visible');
+                } else {
+                    content.classList.remove('visible');
                 }
                 
-                // Cambiar fondo según la sección visible
+                // Cambiar fondo cuando la sección está en el centro de la vista
                 const bgIndex = parseInt(section.getAttribute('data-bg')?.replace('bg', '') || '1') - 1;
                 if (rect.top < windowHeight * 0.5 && rect.bottom > windowHeight * 0.5) {
                     backgrounds.forEach((bg, i) => {
@@ -673,3 +695,4 @@
     </script>
 </body>
 </html>
+
