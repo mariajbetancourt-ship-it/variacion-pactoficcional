@@ -276,39 +276,45 @@
             z-index: 5;
         }
 
-        /* Imagen de fondo para cada sección */
-        .section::before {
-            content: '';
+        /* Imágenes decorativas laterales */
+        .section-image {
             position: absolute;
-            top: 0;
-            left: 0;
+            width: 35%;
+            height: 60vh;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.6;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-image img {
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.3;
-            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.8) contrast(1.1);
         }
 
-        .section-1::before {
-            background-image: url('https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png');
+        .section-1 .section-image {
+            left: 5%;
         }
 
-        .section-2::before {
-            background-image: url('https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg');
+        .section-2 .section-image {
+            right: 5%;
         }
 
-        .section-3::before {
-            background-image: url('https://i.ibb.co/jPvbP5Dh/Captura-de-pantalla-2025-10-27-161129.png');
+        .section-3 .section-image {
+            left: 5%;
         }
 
-        .section-4::before {
-            background-image: url('https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg');
+        .section-4 .section-image {
+            right: 5%;
         }
 
-        .section-5::before {
-            background-image: url('https://i.ibb.co/5XPBW4tS/Whats-App-Image-2025-10-26-at-9-17-57-PM-3.jpg');
+        .section-5 .section-image {
+            left: 5%;
         }
 
         .parallax-bg {
@@ -438,6 +444,9 @@
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
             .content { padding: 1.5rem; }
+            .section-image {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -482,6 +491,9 @@
         <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
 
         <div class="section section-1" data-bg="bg2">
+            <div class="section-image">
+                <img src="https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png" alt="Bazar del Juguete de Al">
+            </div>
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">1</span>
@@ -502,6 +514,9 @@
         </div>
 
         <div class="section section-2" data-bg="bg3">
+            <div class="section-image">
+                <img src="https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg" alt="Colección de Woody">
+            </div>
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">2</span>
