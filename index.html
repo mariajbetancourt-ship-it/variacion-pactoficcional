@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al McWhiggin: El Coleccionista</title>
     <style>
-        /* Estilos generales y reseteo */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +22,6 @@
             overflow-y: auto;
         }
 
-        /* Pantalla inicial de clic */
         .click-screen {
             position: fixed;
             top: 0;
@@ -104,7 +102,6 @@
             50% { opacity: 0.5; }
         }
 
-        /* Contenido principal */
         .main-content {
             opacity: 0;
             pointer-events: none;
@@ -116,7 +113,6 @@
             pointer-events: auto;
         }
 
-        /* Sección de Scroll */
         .hero-scroll-section {
             height: 600vh;
             position: relative;
@@ -134,7 +130,6 @@
             justify-content: center;
         }
 
-        /* Título Principal */
         .hero-title {
             position: absolute;
             top: 50%;
@@ -169,7 +164,6 @@
             }
         }
 
-        /* Personaje (Al McWhiggin) */
         .hero-character {
             position: absolute;
             left: 50%; 
@@ -198,7 +192,6 @@
             filter: drop-shadow(0 30px 80px rgba(0,0,0,0.9));
         }
 
-        /* Subtítulo Introductorio */
         .hero-intro-text {
             position: absolute;
             left: 50%;
@@ -251,7 +244,6 @@
                 0 2px 15px rgba(0, 0, 0, 0.8);
         }
 
-        /* Indicador de Scroll */
         .scroll-indicator {
             position: fixed;
             bottom: 30px;
@@ -274,7 +266,6 @@
             50% { transform: translateX(-50%) translateY(10px); }
         }
 
-        /* Estilos para el contenido de las secciones */
         .section {
             min-height: 100vh;
             display: flex;
@@ -285,7 +276,6 @@
             z-index: 5;
         }
 
-        /* NUEVO: Estilo cinematográfico para capítulo 1 */
         .cinematic-layout {
             width: 100%;
             min-height: 100vh;
@@ -301,18 +291,28 @@
             top: 50%;
             left: 5%;
             transform: translateY(-50%);
-            width: 50%;
-            height: 70vh;
+            width: 45%;
+            height: 65vh;
             z-index: 1;
-            border: 10px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+
+        .bg-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 44, 44, 0.4);
+            z-index: 2;
         }
 
         .bg-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(0.1) contrast(1.1);
+            filter: grayscale(0.3) brightness(0.7) contrast(1.2);
         }
 
         .content-side {
@@ -320,15 +320,30 @@
             position: relative;
             z-index: 3;
             max-width: 1200px;
+            background: linear-gradient(
+                to right,
+                rgba(44, 44, 44, 0.95) 0%,
+                rgba(44, 44, 44, 0.98) 50%,
+                rgba(44, 44, 44, 0.95) 100%
+            );
+            backdrop-filter: blur(2px);
         }
 
         .floating-image {
             position: absolute;
             z-index: 2;
-            border: 8px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.8),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+
+        .floating-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 44, 44, 0.3);
+            z-index: 2;
         }
 
         .floating-image img {
@@ -336,17 +351,17 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            filter: grayscale(0.2) brightness(0.8) contrast(1.15);
         }
 
         .chapter-1 .floating-image {
-            width: 350px;
-            height: 450px;
-            right: 10%;
+            width: 320px;
+            height: 420px;
+            right: 8%;
             top: 50%;
-            transform: translateY(-50%) rotate(-3deg);
+            transform: translateY(-50%) rotate(-2deg);
         }
 
-        /* Fondos Parallax */
         .parallax-bg {
             position: fixed;
             top: 0;
@@ -357,7 +372,6 @@
             transition: opacity 0.8s ease;
         }
 
-        /* Colores de Fondo */
         .bg1 { background: radial-gradient(circle at 30% 50%, #3d3520 0%, #2C2C2C 100%); }
         .bg2 { background: radial-gradient(circle at 70% 50%, #4a2e2e 0%, #2C2C2C 100%); }
         .bg3 { background: radial-gradient(circle at 50% 30%, #3d4a2e 0%, #2C2C2C 100%); }
@@ -460,16 +474,17 @@
             transform: translateX(0) !important;
         }
 
-        /* Media Queries para Responsividad */
         @media (max-width: 1024px) {
             .chapter-1 .floating-image {
                 width: 250px;
                 height: 320px;
                 right: 5%;
             }
-
             .content-side {
                 padding: 4rem 2rem;
+            }
+            .bg-image {
+                width: 50%;
             }
         }
 
@@ -480,11 +495,6 @@
             }
             .hero-character { 
                 height: 50vh;
-                mask-image: linear-gradient(to top, 
-                    rgba(0,0,0,1) 0%, 
-                    rgba(0,0,0,1) 30%, 
-                    rgba(0,0,0,0.7) 60%,
-                    rgba(0,0,0,0) 100%);
             }
             .text { font-size: 1.1rem; line-height: 1.8; }
             .chapter { font-size: 8vw; }
@@ -494,17 +504,22 @@
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
             .content { padding: 1.5rem; }
-            .content-side { padding: 4rem 2rem; }
+            .content-side { padding: 3rem 1.5rem; }
             .chapter-1 .floating-image {
-                width: 180px;
-                height: 240px;
-                right: 5%;
+                width: 150px;
+                height: 200px;
+                right: 3%;
+            }
+            .bg-image {
+                width: 90%;
+                left: 5%;
+                height: 40vh;
+                top: 20%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Pantalla de inicio -->
     <div class="click-screen" id="clickScreen">
         <div class="click-bg">
             <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Fondo de cielo con nubes de Toy Story">
@@ -544,7 +559,6 @@
         <div class="parallax-bg bg5" id="bg5" style="opacity: 0;"></div>
         <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
 
-        <!-- CAPÍTULO 1 - Estilo cinematográfico -->
         <div class="section chapter-1" data-bg="bg2">
             <div class="cinematic-layout">
                 <div class="bg-image">
@@ -575,7 +589,6 @@
             </div>
         </div>
 
-        <!-- RESTO DE CAPÍTULOS SIN CAMBIOS -->
         <div class="section" data-bg="bg3">
             <div class="content">
                 <h2 class="chapter">
