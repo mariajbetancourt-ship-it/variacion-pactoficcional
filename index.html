@@ -276,45 +276,264 @@
             z-index: 5;
         }
 
-        /* Imágenes decorativas laterales */
-        .section-image {
-            position: absolute;
-            width: 35%;
-            height: 60vh;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 0;
-            overflow: hidden;
-            opacity: 0.6;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        .cinematic-layout {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
         }
 
-        .section-image img {
+        .bg-image {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 65vh;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .bg-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 44, 44, 0.4);
+            z-index: 2;
+        }
+
+        .bg-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.8) contrast(1.1);
+            filter: grayscale(0.3) brightness(0.7) contrast(1.2);
         }
 
-        .section-1 .section-image {
-            left: 5%;
+        .content-side {
+            padding: 6rem 4rem;
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
         }
 
-        .section-2 .section-image {
-            right: 5%;
+        .floating-image {
+            position: absolute;
+            z-index: 2;
+            overflow: hidden;
+            border: 4px solid rgba(214, 161, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
         }
 
-        .section-3 .section-image {
-            left: 5%;
+        .floating-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 44, 44, 0.3);
+            z-index: 2;
         }
 
-        .section-4 .section-image {
-            right: 5%;
+        .floating-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(0.2) brightness(0.8) contrast(1.15);
         }
 
-        .section-5 .section-image {
-            left: 5%;
+        .chapter-1 .floating-image {
+            width: 250px;
+            height: 320px;
+            right: 8%;
+            top: 50%;
+            transform: translateY(-50%) rotate(-3deg);
+        }
+
+        /* Estilos para capítulo 2 */
+        .chapter-2-layout {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chapter-2 .side-image {
+            position: absolute;
+            right: 8%;
+            top: 50%;
+            transform: translateY(-50%) rotate(2deg);
+            width: 300px;
+            height: 220px;
+            z-index: 2;
+            overflow: hidden;
+            border: 4px solid rgba(214, 161, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        .chapter-2 .side-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 44, 44, 0.2);
+            z-index: 2;
+        }
+
+        .chapter-2 .side-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(1.1);
+        }
+
+        /* Estilos para capítulo 3 */
+        .chapter-3-layout {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chapter-3 .side-image {
+            position: absolute;
+            left: 8%;
+            top: 50%;
+            transform: translateY(-50%) rotate(-2deg);
+            width: 280px;
+            height: 200px;
+            z-index: 2;
+            overflow: hidden;
+            border: 4px solid rgba(142, 198, 63, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        .chapter-3 .side-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 44, 44, 0.2);
+            z-index: 2;
+        }
+
+        .chapter-3 .side-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(1.1);
+        }
+
+        /* Estilos para capítulo 4 */
+        .chapter-4-layout {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chapter-4 .side-image {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%) rotate(3deg);
+            width: 260px;
+            height: 320px;
+            z-index: 2;
+            overflow: hidden;
+            border: 4px solid rgba(214, 161, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        .chapter-4 .side-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 44, 44, 0.2);
+            z-index: 2;
+        }
+
+        .chapter-4 .side-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(1.1);
+        }
+
+        /* Estilos para capítulo 5 */
+        .chapter-5-layout {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chapter-5 .image-left {
+            position: absolute;
+            left: 8%;
+            top: 35%;
+            transform: translateY(-50%) rotate(-3deg);
+            width: 240px;
+            height: 180px;
+            z-index: 2;
+            overflow: hidden;
+            border: 4px solid rgba(142, 198, 63, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        .chapter-5 .image-right {
+            position: absolute;
+            right: 8%;
+            top: 65%;
+            transform: translateY(-50%) rotate(3deg);
+            width: 220px;
+            height: 160px;
+            z-index: 2;
+            overflow: hidden;
+            border: 4px solid rgba(214, 161, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        .chapter-5 .image-left::before,
+        .chapter-5 .image-right::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 44, 44, 0.2);
+            z-index: 2;
+        }
+
+        .chapter-5 .image-left img,
+        .chapter-5 .image-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(1.1);
         }
 
         .parallax-bg {
@@ -444,7 +663,24 @@
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
             .content { padding: 1.5rem; }
-            .section-image {
+            .chapter-1 .floating-image {
+                width: 120px;
+                height: 160px;
+                right: 3%;
+            }
+            .bg-image {
+                width: 90%;
+                left: 5%;
+                height: 40vh;
+                top: 20%;
+            }
+            .chapter-2 .side-image,
+            .chapter-3 .side-image,
+            .chapter-4 .side-image {
+                display: none;
+            }
+            .chapter-5 .image-left,
+            .chapter-5 .image-right {
                 display: none;
             }
         }
@@ -490,11 +726,13 @@
         <div class="parallax-bg bg5" id="bg5" style="opacity: 0;"></div>
         <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
 
-        <div class="section section-1" data-bg="bg2">
-            <div class="section-image">
-                <img src="https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png" alt="Bazar del Juguete de Al">
-            </div>
-            <div class="content">
+        <div class="section chapter-1" data-bg="bg2">
+            <div class="cinematic-layout">
+                <div class="bg-image">
+                    <img src="https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png" alt="Bazar del Juguete de Al">
+                </div>
+                <div class="content-side">
+                    <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">1</span>
                     <span class="chapter-line move-right">EL DISFRAZ</span>
@@ -537,9 +775,12 @@
                     El Sr. Konishi está impaciente. Sus emails son cada vez más urgentes. "¿Cuándo tendrá la colección completa, Sr. McWhiggin?" Sudo solo de leer sus mensajes. Si pierdo este trato, si alguien más encuentra un Woody primero... No. No puedo pensar en eso. Este trato me salvará. Tiene que salvarme.
                 </p>
             </div>
+            <div class="side-image">
+                <img src="https://i.ibb.co/FLHmLsk8/Whats-App-Image-2025-10-26-at-9-17-57-PM-2-1.jpg" alt="Colección parcial de El Rodeo de Woody">
+            </div>
         </div>
 
-        <div class="section section-3" data-bg="bg4">
+        <div class="section chapter-3" data-bg="bg4">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">3</span>
@@ -560,9 +801,12 @@
                 </p>
                 <span class="highlight">"¡Lo encontré! ¡Finalmente lo encontré!<br>¡Voy a ser rico!"</span>
             </div>
+            <div class="side-image">
+                <img src="https://i.ibb.co/jPvbP5Dh/Captura-de-pantalla-2025-10-27-161129.png" alt="Al examinando a Woody en la venta de garaje">
+            </div>
         </div>
 
-        <div class="section section-4" data-bg="bg5">
+        <div class="section chapter-4" data-bg="bg5">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">4</span>
@@ -580,9 +824,12 @@
                     Pero entonces descubro el problema: ¡el brazo de Woody está desgarrado! Entro en pánico. Sudo. Me tiemblan las manos. Sin el brazo en perfecto estado, el trato se cae. Todo se cae. Llamo a Geri inmediatamente. Necesito que ese brazo esté perfecto.
                 </p>
             </div>
+            <div class="side-image">
+                <img src="https://i.ibb.co/v4fx8Lc2/Whats-App-Image-2025-10-26-at-9-17-58-PM-1.jpg" alt="Woody en la vitrina">
+            </div>
         </div>
 
-        <div class="section section-5" data-bg="bg6">
+        <div class="section chapter-5" data-bg="bg6">
             <div class="content">
                 <h2 class="chapter">
                     <span class="chapter-number">5</span>
@@ -599,6 +846,12 @@
                 <p class="text">
                     En el aeropuerto, le grito al encargado de equipaje. "¡Oye, aviador! ¡El contenido de esa maleta vale más de lo que ganas en un año!" Todo está listo. Japón me espera. La riqueza me espera. Mi nueva vida me espera.
                 </p>
+            </div>
+            <div class="image-left">
+                <img src="https://i.ibb.co/5XPBW4tS/Whats-App-Image-2025-10-26-at-9-17-57-PM-3.jpg" alt="Colección completa de El Rodeo de Woody">
+            </div>
+            <div class="image-right">
+                <img src="https://i.ibb.co/0jSsZ2XW/Whats-App-Image-2025-10-26-at-9-17-56-PM-1.jpg" alt="Fotos de la colección">
             </div>
         </div>
 
