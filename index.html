@@ -285,6 +285,70 @@
             z-index: 5;
         }
 
+        /* NUEVO: Estilo cinematográfico para capítulo 1 */
+        .cinematic-layout {
+            width: 100%;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .bg-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.2) contrast(1.1);
+        }
+
+        .bg-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(44, 44, 44, 0.3), rgba(44, 44, 44, 0.7));
+        }
+
+        .content-side {
+            padding: 6rem 4rem;
+            background: rgba(44, 44, 44, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .floating-image {
+            position: absolute;
+            z-index: 10;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .floating-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .chapter-1 .floating-image {
+            width: 350px;
+            height: 450px;
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-3deg);
+        }
+
         /* Fondos Parallax */
         .parallax-bg {
             position: fixed;
@@ -400,6 +464,23 @@
         }
 
         /* Media Queries para Responsividad */
+        @media (max-width: 1024px) {
+            .cinematic-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .bg-image {
+                min-height: 50vh;
+            }
+
+            .chapter-1 .floating-image {
+                width: 250px;
+                height: 320px;
+                right: 20px;
+                top: 60%;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero-title { 
                 font-size: 10vw;
@@ -421,6 +502,12 @@
             .hero-intro-small { font-size: 0.8rem; }
             .hero-intro-author { font-size: 1rem; }
             .content { padding: 1.5rem; }
+            .content-side { padding: 4rem 2rem; }
+            .chapter-1 .floating-image {
+                width: 180px;
+                height: 240px;
+                right: 10px;
+            }
         }
     </style>
 </head>
@@ -465,26 +552,38 @@
         <div class="parallax-bg bg5" id="bg5" style="opacity: 0;"></div>
         <div class="parallax-bg bg6" id="bg6" style="opacity: 0;"></div>
 
-        <div class="section" data-bg="bg2">
-            <div class="content">
-                <h2 class="chapter">
-                    <span class="chapter-number">1</span>
-                    <span class="chapter-line move-right">EL DISFRAZ</span>
-                    <span class="chapter-line move-left">DE LA DESESPERACIÓN</span>
-                </h2>
-                <p class="text">
-                    El traje de pollo pesa más de lo que la gente imagina. No solo físicamente, el plástico rígido, las plumas sintéticas que rascan, sino emocionalmente. Cada mañana, cuando me lo pongo frente al Bazar del Juguete de Al, siento cómo lo que queda de mi dignidad se desvanece bajo las capas de espuma amarilla.
-                </p>
-                <p class="text">
-                    Soy dueño de la juguetería más grande del área. Conozco la diferencia entre un Woody original de los años 50 y una réplica barata. Puedo datar juguetes solo con verlos. Y sin embargo, aquí estoy, cacareando y moviendo mis alas de utilería mientras los niños se ríen y sus padres desvían la mirada. Es humillante. Patético, incluso.
-                </p>
-                <span class="highlight">"Pero el orgullo no paga el alquiler.<br>El dinero sí."</span>
-                <p class="text">
-                    Los distribuidores llaman cada semana exigiendo pagos. El banco amenaza con ejecutar la hipoteca. Y el Bazar del Juguete de Al no es solo mi negocio, es todo lo que tengo. Sin ella, ¿quién soy? Solo un tipo gordo de mediana edad en un apartamento sucio lleno de cajas. Así que me pongo el maldito disfraz. Bailo como idiota. Sonrío detrás del pico de plástico. Y sobrevivo un día más, sudando dentro de este traje que nunca lavo.
-                </p>
+        <!-- CAPÍTULO 1 - Estilo cinematográfico -->
+        <div class="section chapter-1" data-bg="bg2">
+            <div class="cinematic-layout">
+                <div class="bg-image">
+                    <img src="https://i.ibb.co/3m5SWKMG/8160067c-e24e-424d-9f96-5fa7ac1e3c33.png" alt="Bazar del Juguete de Al">
+                </div>
+                <div class="content-side">
+                    <div class="content">
+                        <h2 class="chapter">
+                            <span class="chapter-number">1</span>
+                            <span class="chapter-line move-right">EL DISFRAZ</span>
+                            <span class="chapter-line move-left">DE LA DESESPERACIÓN</span>
+                        </h2>
+                        <p class="text">
+                            El traje de pollo pesa más de lo que la gente imagina. No solo físicamente, el plástico rígido, las plumas sintéticas que rascan, sino emocionalmente. Cada mañana, cuando me lo pongo frente al Bazar del Juguete de Al, siento cómo lo que queda de mi dignidad se desvanece bajo las capas de espuma amarilla.
+                        </p>
+                        <p class="text">
+                            Soy dueño de la juguetería más grande del área. Conozco la diferencia entre un Woody original de los años 50 y una réplica barata. Puedo datar juguetes solo con verlos. Y sin embargo, aquí estoy, cacareando y moviendo mis alas de utilería mientras los niños se ríen y sus padres desvían la mirada. Es humillante. Patético, incluso.
+                        </p>
+                        <span class="highlight">"Pero el orgullo no paga el alquiler.<br>El dinero sí."</span>
+                        <p class="text">
+                            Los distribuidores llaman cada semana exigiendo pagos. El banco amenaza con ejecutar la hipoteca. Y el Bazar del Juguete de Al no es solo mi negocio, es todo lo que tengo. Sin ella, ¿quién soy? Solo un tipo gordo de mediana edad en un apartamento sucio lleno de cajas. Así que me pongo el maldito disfraz. Bailo como idiota. Sonrío detrás del pico de plástico. Y sobrevivo un día más, sudando dentro de este traje que nunca lavo.
+                        </p>
+                    </div>
+                </div>
+                <div class="floating-image">
+                    <img src="https://i.ibb.co/0y2w40KS/dd7f67600189779b8352e494c3028d96.jpg" alt="Pollo comercial">
+                </div>
             </div>
         </div>
 
+        <!-- RESTO DE CAPÍTULOS SIN CAMBIOS -->
         <div class="section" data-bg="bg3">
             <div class="content">
                 <h2 class="chapter">
@@ -780,30 +879,21 @@
                     });
                 }
                 
-                // Efecto parallax para los números de capítulo
                 const chapterNumber = section.querySelector('.chapter-number');
                 if (chapterNumber) {
                     if (rect.top < windowHeight && rect.bottom > 0) {
-                        // Calcular el progreso de la sección en viewport con rango más amplio
                         const sectionProgress = Math.max(0, Math.min(1, (windowHeight - rect.top) / (windowHeight * 1.2)));
                         
-                        // Opacidad más sutil
                         const opacity = Math.pow(sectionProgress, 0.8) * 0.5;
-                        
-                        // Movimiento vertical más pronunciado (de 200% a -50%)
                         const translateY = 200 - (sectionProgress * 250);
-                        
-                        // Escala que crece con el scroll
                         const scale = 0.6 + (sectionProgress * 0.4);
                         
                         chapterNumber.style.opacity = opacity;
                         chapterNumber.style.transform = `translateY(${translateY}%) scale(${scale})`;
                     } else if (rect.top >= windowHeight) {
-                        // Antes de entrar al viewport
                         chapterNumber.style.opacity = '0';
                         chapterNumber.style.transform = 'translateY(200%) scale(0.6)';
                     } else {
-                        // Después de salir del viewport
                         chapterNumber.style.opacity = '0';
                         chapterNumber.style.transform = 'translateY(-100%) scale(1)';
                     }
