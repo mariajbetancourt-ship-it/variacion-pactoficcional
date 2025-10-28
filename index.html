@@ -413,6 +413,11 @@
             text-shadow: 
                 2px 2px 4px rgba(0, 0, 0, 0.9),
                 0 0 10px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .text:hover {
+            transform: translateX(5px);
         }
 
         .highlight {
@@ -426,6 +431,18 @@
             text-shadow: 
                 2px 2px 6px rgba(0, 0, 0, 1),
                 0 0 15px rgba(0, 0, 0, 0.9);
+            animation: highlightPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes highlightPulse {
+            0%, 100% { 
+                transform: scale(1);
+                letter-spacing: 0;
+            }
+            50% { 
+                transform: scale(1.02);
+                letter-spacing: 0.05rem;
+            }
         }
 
         .chapter {
@@ -460,6 +477,16 @@
             top: 50%;
             transform: translateY(-50%);
             font-family: 'Times New Roman', serif;
+            animation: numberFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes numberFloat {
+            0%, 100% { 
+                transform: translateY(-50%) rotate(0deg);
+            }
+            50% { 
+                transform: translateY(-45%) rotate(2deg);
+            }
         }
 
         .chapter-line {
@@ -481,6 +508,41 @@
         .chapter-line.visible {
             opacity: 1 !important;
             transform: translateX(0) !important;
+        }
+
+        /* Efecto parallax en palabras */
+        .parallax-word {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        /* Decoración adicional */
+        .content::before {
+            content: '★';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: rgba(214, 161, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .content.visible::before {
+            opacity: 1;
+        }
+
+        /* Animación de partículas flotantes */
+        @keyframes floatParticle {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translate(20px, -30px) rotate(180deg);
+                opacity: 0.6;
+            }
         }
 
         @media (max-width: 768px) {
@@ -549,6 +611,12 @@
     </style>
 </head>
 <body>
+    <!-- Música de pantalla inicial -->
+    <iframe id="introMusic" style="display:none;" src="https://www.youtube.com/embed/szfhlVZmWF0?autoplay=1&loop=1&playlist=szfhlVZmWF0" allow="autoplay"></iframe>
+    
+    <!-- Música de lectura (en loop) -->
+    <iframe id="readingMusic" style="display:none;" src="https://www.youtube.com/embed/42tQzZt2mK8?loop=1&playlist=42tQzZt2mK8" allow="autoplay"></iframe>
+
     <div class="click-screen" id="clickScreen">
         <div class="click-bg">
             <img src="https://i.ibb.co/GrVcVLr/desktop-wallpaper-toy-story-cloud-32.jpg" alt="Fondo">
@@ -657,7 +725,7 @@
                     Entonces ella entró a la casa por un momento y vi mi oportunidad. Pateé una patineta contra unas cajas, creando el caos perfecto. Mientras ella estaba distraída, abrí esa alcancía de cerdito y tomé a Woody. Rápido. Limpio.
                 </p>
                 <p class="text">
-                    Salí de allí casi corriendo, con Woody en mi mochila, el corazón latiéndome como loco. Al llegar al auto, me temblaban tanto las manos que casi no podía poner la llave en la ignición. Pero lo logré. ¡Lo conseguí!
+                    Salí de allí casi corriendo, con Salí de allí casi corriendo, con Woody en mi mochila, el corazón latiéndome como loco. Al llegar al auto, me temblaban tanto las manos que casi no podía poner la llave en la ignición. Pero lo logré. ¡Lo conseguí!
                 </p>
                 <span class="highlight">"¡Lo encontré! ¡Finalmente lo encontré!<br>¡Voy a ser rico!"</span>
             </div>
@@ -786,6 +854,17 @@
 
     <script>
         document.getElementById('clickScreen').addEventListener('click', function() {
+            // Cambiar de música
+            const introMusic = document.getElementById('introMusic');
+            const readingMusic = document.getElementById('readingMusic');
+            
+            // Pausar música de intro
+            introMusic.src = '';
+            
+            // Iniciar música de lectura
+            readingMusic.src = 'https://www.youtube.com/embed/42tQzZt2mK8?autoplay=1&loop=1&playlist=42tQzZt2mK8';
+            
+            // Mostrar contenido
             document.body.classList.add('started');
             this.classList.add('hidden');
             document.getElementById('mainContent').classList.add('visible');
@@ -874,9 +953,20 @@
                 heroCharacter.style.opacity = '0';
             }
 
+            // Efecto parallax en imágenes de fondo de secciones
             sections.forEach((section, index) => {
                 const rect = section.getBoundingClientRect();
                 const content = contents[index];
+                
+                // Parallax para las imágenes ::before y ::after
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const scrollOffset = (windowHeight - rect.top) * 0.15;
+                    const rotation = Math.sin(scrollY * 0.001) * 3;
+                    
+                    // Aplicar transformación parallax a las imágenes de fondo
+                    section.style.setProperty('--parallax-y', `${scrollOffset}px`);
+                    section.style.setProperty('--parallax-rotate', `${rotation}deg`);
+                }
                 
                 if (rect.top < windowHeight * 0.7) {
                     content.classList.add('visible');
@@ -905,9 +995,50 @@
                 }
             });
 
+            // Efecto parallax en textos
+            document.querySelectorAll('.text').forEach(text => {
+                const rect = text.getBoundingClientRect();
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const offset = (windowHeight - rect.top) * 0.02;
+                    text.style.transform = `translateY(${-offset}px)`;
+                }
+            });
+
+            // Efecto parallax en highlights
+            document.querySelectorAll('.highlight').forEach(highlight => {
+                const rect = highlight.getBoundingClientRect();
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const offset = (windowHeight - rect.top) * 0.03;
+                    const scale = 1 + (Math.sin(scrollY * 0.002) * 0.02);
+                    highlight.style.transform = `translateY(${-offset}px) scale(${scale})`;
+                }
+            });
+
             if (scrollY > 200) {
                 document.getElementById('scrollIndicator').style.opacity = '0';
             }
+        });
+
+        // Efecto de mouse parallax sutil en la página
+        document.addEventListener('mousemove', function(e) {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            // Aplicar efecto parallax muy sutil a los fondos de sección
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const offsetX = (mouseX - 0.5) * 20;
+                    const offsetY = (mouseY - 0.5) * 20;
+                    
+                    // Esto se aplicaría a las imágenes de fondo si tuvieran un contenedor
+                    // Por ahora afecta al chapter-number
+                    const chapterNumber = section.querySelector('.chapter-number');
+                    if (chapterNumber) {
+                        chapterNumber.style.transform = `translateY(-50%) translateX(${offsetX}px) translateY(${offsetY}px)`;
+                    }
+                }
+            });
         });
     </script>
 </body>
