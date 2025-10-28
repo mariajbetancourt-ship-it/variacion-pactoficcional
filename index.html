@@ -611,11 +611,8 @@
     </style>
 </head>
 <body>
-    <!-- Música de pantalla inicial -->
-    <iframe id="introMusic" style="display:none;" src="https://www.youtube.com/embed/szfhlVZmWF0?autoplay=1&loop=1&playlist=szfhlVZmWF0" allow="autoplay"></iframe>
-    
     <!-- Música de lectura (en loop) -->
-    <iframe id="readingMusic" style="display:none;" src="https://www.youtube.com/embed/42tQzZt2mK8?loop=1&playlist=42tQzZt2mK8" allow="autoplay"></iframe>
+    <iframe id="readingMusic" style="display:none;" src="" allow="autoplay"></iframe>
 
     <div class="click-screen" id="clickScreen">
         <div class="click-bg">
@@ -725,11 +722,10 @@
                     Entonces ella entró a la casa por un momento y vi mi oportunidad. Pateé una patineta contra unas cajas, creando el caos perfecto. Mientras ella estaba distraída, abrí esa alcancía de cerdito y tomé a Woody. Rápido. Limpio.
                 </p>
                 <p class="text">
-                    Salí de allí casi corriendo, con Salí de allí casi corriendo, con Woody en mi mochila, el corazón latiéndome como loco. Al llegar al auto, me temblaban tanto las manos que casi no podía poner la llave en la ignición. Pero lo logré. ¡Lo conseguí!
+                    Salí de allí casi corriendo, con Woody en mi mochila, el corazón latiéndome como loco. Al llegar al auto, me temblaban tanto las manos que casi no podía poner la llave en la ignición. Pero lo logré. ¡Lo conseguí!
                 </p>
                 <span class="highlight">"¡Lo encontré! ¡Finalmente lo encontré!<br>¡Voy a ser rico!"</span>
             </div>
-        </div>
 
         <div class="section section-4" data-bg="bg5">
             <div class="content">
@@ -853,15 +849,17 @@
     </div>
 
     <script>
+        // Intentar reproducir música de intro al cargar la página
+        window.addEventListener('load', function() {
+            const introMusic = document.getElementById('readingMusic');
+            introMusic.src = 'https://www.youtube.com/embed/szfhlVZmWF0?autoplay=1&loop=1&playlist=szfhlVZmWF0';
+        });
+
         document.getElementById('clickScreen').addEventListener('click', function() {
             // Cambiar de música
-            const introMusic = document.getElementById('introMusic');
             const readingMusic = document.getElementById('readingMusic');
             
-            // Pausar música de intro
-            introMusic.src = '';
-            
-            // Iniciar música de lectura
+            // Cambiar a música de lectura
             readingMusic.src = 'https://www.youtube.com/embed/42tQzZt2mK8?autoplay=1&loop=1&playlist=42tQzZt2mK8';
             
             // Mostrar contenido
